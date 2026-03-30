@@ -1,0 +1,38 @@
+{
+  "@@locale": "vi",
+
+  "@@_COMMON": "============================================================",
+  "common_appTitle": "Flutter Clean Template",
+  "common_loading": "Đang tải...",
+  "common_emptyList": "Không có mục nào.",
+  "common_pageNotFound": "Không tìm thấy trang",
+
+  "@@_BUTTON": "============================================================",
+  "btn_retry": "Thử lại",
+  "btn_cancel": "Hủy",
+  "btn_ok": "OK",
+  "btn_save": "Lưu",
+  "btn_delete": "Xóa",
+
+  "@@_ERROR": "============================================================",
+  "error_network": "Lỗi mạng. Vui lòng kiểm tra kết nối.",
+  "error_unauthorized": "Phiên đăng nhập hết hạn. Vui lòng đăng nhập lại.",
+  "error_server": "Lỗi máy chủ. Vui lòng thử lại sau.",
+  "error_unknown": "Đã xảy ra lỗi không mong muốn.",
+  "error_notFound": "Không tìm thấy tài nguyên.",
+
+  "@@_PRODUCT_LIST": "======================================================",
+  "productList_title": "Sản phẩm",
+  "productList_empty": "Không tìm thấy sản phẩm.",
+  "productList_searchHint": "Tìm kiếm sản phẩm...",
+
+  "@@_PRODUCT_DETAIL": "====================================================",
+  "productDetail_title": "Chi tiết sản phẩm",
+  "productDetail_addToCart": "Thêm vào giỏ hàng",
+
+  "@@_AUTH": "===============================================================",
+  "auth_login": "Đăng nhập",
+  "auth_logout": "Đăng xuất",
+  "auth_emailHint": "Nhập email của bạn",
+  "auth_passwordHint": "Nhập mật khẩu của bạn"
+}

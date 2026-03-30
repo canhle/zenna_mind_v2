@@ -1,0 +1,23 @@
+{
+  "project_info": {
+    "project_number": "TODO_REPLACE",
+    "project_id": "TODO_REPLACE",
+    "storage_bucket": "TODO_REPLACE"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "TODO_REPLACE",
+        "android_client_info": {
+          "package_name": "com.example.flutter_clean_template.dev"
+        }
+      },
+      "api_key": [
+        {
+          "current_key": "TODO_REPLACE"
+        }
+      ]
+    }
+  ],
+  "configuration_version": "1"
+}
