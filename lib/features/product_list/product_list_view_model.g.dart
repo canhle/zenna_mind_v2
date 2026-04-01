@@ -7,7 +7,7 @@ part of 'product_list_view_model.dart';
 // **************************************************************************
 
 String _$productListViewModelHash() =>
-    r'352c4a4bece4fccda0aad34cd245787201cb0563';
+    r'2a3fd6db962e5d0c02cb9c1eb19f0fa5520a4dbf';
 
 /// Copied from Dart SDK
 class _SystemHash {

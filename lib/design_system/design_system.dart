@@ -19,5 +19,5 @@ export 'components/ds_dialog.dart';
 export 'components/ds_text_field.dart';
 export 'components/ds_toast.dart';
 
-// Icons
-export 'icons/ds_icons.dart';
+// Generated assets (flutter_gen)
+export 'generated/assets.gen.dart';
