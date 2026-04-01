@@ -76,4 +76,32 @@ class SEn extends S {
 
   @override
   String get auth_passwordHint => 'Enter your password';
+
+  @override
+  String get welcome_badge => 'Peace';
+
+  @override
+  String get welcome_stats => 'Over 1 million people practice every day';
+
+  @override
+  String get welcome_greeting => 'Welcome to';
+
+  @override
+  String get welcome_appName => 'Meditation App';
+
+  @override
+  String get welcome_subtitle =>
+      'Start your journey to inner peace and find balance in your soul.';
+
+  @override
+  String get welcome_cta => 'Get Started';
+
+  @override
+  String get welcome_copyright => '© 2024 Thiền Sanctuary';
+
+  @override
+  String get welcome_privacy => 'Privacy Policy';
+
+  @override
+  String get welcome_terms => 'Terms of Use';
 }

@@ -1,92 +1,66 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 abstract class DsTypography {
-  static const String fontFamily = 'Roboto';
+  static TextTheme get textTheme {
+    final headlineTextTheme = GoogleFonts.plusJakartaSansTextTheme();
+    final bodyTextTheme = GoogleFonts.manropeTextTheme();
 
-  static const TextTheme textTheme = TextTheme(
-    displayLarge: TextStyle(
-      fontFamily: fontFamily,
-      fontSize: 57,
-      fontWeight: FontWeight.w400,
-      letterSpacing: -0.25,
-    ),
-    displayMedium: TextStyle(
-      fontFamily: fontFamily,
-      fontSize: 45,
-      fontWeight: FontWeight.w400,
-    ),
-    displaySmall: TextStyle(
-      fontFamily: fontFamily,
-      fontSize: 36,
-      fontWeight: FontWeight.w400,
-    ),
-    headlineLarge: TextStyle(
-      fontFamily: fontFamily,
-      fontSize: 32,
-      fontWeight: FontWeight.w400,
-    ),
-    headlineMedium: TextStyle(
-      fontFamily: fontFamily,
-      fontSize: 28,
-      fontWeight: FontWeight.w400,
-    ),
-    headlineSmall: TextStyle(
-      fontFamily: fontFamily,
-      fontSize: 24,
-      fontWeight: FontWeight.w400,
-    ),
-    titleLarge: TextStyle(
-      fontFamily: fontFamily,
-      fontSize: 22,
-      fontWeight: FontWeight.w400,
-    ),
-    titleMedium: TextStyle(
-      fontFamily: fontFamily,
-      fontSize: 16,
-      fontWeight: FontWeight.w500,
-      letterSpacing: 0.15,
-    ),
-    titleSmall: TextStyle(
-      fontFamily: fontFamily,
-      fontSize: 14,
-      fontWeight: FontWeight.w500,
-      letterSpacing: 0.1,
-    ),
-    bodyLarge: TextStyle(
-      fontFamily: fontFamily,
-      fontSize: 16,
-      fontWeight: FontWeight.w400,
-      letterSpacing: 0.5,
-    ),
-    bodyMedium: TextStyle(
-      fontFamily: fontFamily,
-      fontSize: 14,
-      fontWeight: FontWeight.w400,
-      letterSpacing: 0.25,
-    ),
-    bodySmall: TextStyle(
-      fontFamily: fontFamily,
-      fontSize: 12,
-      fontWeight: FontWeight.w400,
-      letterSpacing: 0.4,
-    ),
-    labelLarge: TextStyle(
-      fontFamily: fontFamily,
-      fontSize: 14,
-      fontWeight: FontWeight.w500,
-      letterSpacing: 0.1,
-    ),
-    labelMedium: TextStyle(
-      fontFamily: fontFamily,
-      fontSize: 12,
-      fontWeight: FontWeight.w500,
-      letterSpacing: 0.5,
-    ),
-    labelSmall: TextStyle(
-      fontFamily: fontFamily,
-      fontSize: 11,
-      fontWeight: FontWeight.w500,
-      letterSpacing: 0.5,
-    ),
-  );
+    return TextTheme(
+      displayLarge: headlineTextTheme.displayLarge!.copyWith(
+        fontWeight: FontWeight.w700,
+        letterSpacing: -0.25,
+      ),
+      displayMedium: headlineTextTheme.displayMedium!.copyWith(
+        fontWeight: FontWeight.w700,
+      ),
+      displaySmall: headlineTextTheme.displaySmall!.copyWith(
+        fontWeight: FontWeight.w600,
+      ),
+      headlineLarge: headlineTextTheme.headlineLarge!.copyWith(
+        fontWeight: FontWeight.w700,
+      ),
+      headlineMedium: headlineTextTheme.headlineMedium!.copyWith(
+        fontWeight: FontWeight.w600,
+      ),
+      headlineSmall: headlineTextTheme.headlineSmall!.copyWith(
+        fontWeight: FontWeight.w600,
+      ),
+      titleLarge: headlineTextTheme.titleLarge!.copyWith(
+        fontWeight: FontWeight.w600,
+      ),
+      titleMedium: bodyTextTheme.titleMedium!.copyWith(
+        fontWeight: FontWeight.w500,
+        letterSpacing: 0.15,
+      ),
+      titleSmall: bodyTextTheme.titleSmall!.copyWith(
+        fontWeight: FontWeight.w500,
+        letterSpacing: 0.1,
+      ),
+      bodyLarge: bodyTextTheme.bodyLarge!.copyWith(
+        fontWeight: FontWeight.w400,
+        letterSpacing: 0.5,
+      ),
+      bodyMedium: bodyTextTheme.bodyMedium!.copyWith(
+        fontWeight: FontWeight.w400,
+        letterSpacing: 0.25,
+      ),
+      bodySmall: bodyTextTheme.bodySmall!.copyWith(
+        fontWeight: FontWeight.w400,
+        letterSpacing: 0.4,
+      ),
+      labelLarge: bodyTextTheme.labelLarge!.copyWith(
+        fontWeight: FontWeight.w600,
+        letterSpacing: 0.1,
+      ),
+      labelMedium: bodyTextTheme.labelMedium!.copyWith(
+        fontWeight: FontWeight.w500,
+        letterSpacing: 0.5,
+      ),
+      labelSmall: bodyTextTheme.labelSmall!.copyWith(
+        fontWeight: FontWeight.w500,
+        letterSpacing: 0.5,
+      ),
+    );
+  }
 }

@@ -4,11 +4,13 @@ import 'package:riverpod/riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:flutter_clean_template/features/product_list/models/product_list_arguments.dart';
 import 'package:flutter_clean_template/features/product_list/product_list_screen.dart';
+import 'package:flutter_clean_template/features/welcome/welcome_screen.dart';
 
 part 'app_router.g.dart';
 
 abstract class AppRoutes {
-  static const String home = '/';
+  static const String welcome = '/';
+  static const String home = '/home';
   static const String productList = '/products';
   static const String productDetail = '/products/:id';
 }
@@ -16,9 +18,13 @@ abstract class AppRoutes {
 @riverpod
 GoRouter appRouter(Ref ref) {
   return GoRouter(
-    initialLocation: AppRoutes.home,
+    initialLocation: AppRoutes.welcome,
     debugLogDiagnostics: true,
     routes: [
+      GoRoute(
+        path: AppRoutes.welcome,
+        builder: (_, __) => const WelcomeScreen(),
+      ),
       GoRoute(
         path: AppRoutes.home,
         builder: (_, __) => const ProductListScreen(

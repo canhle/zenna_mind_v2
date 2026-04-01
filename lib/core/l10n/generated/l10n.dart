@@ -234,6 +234,60 @@ abstract class S {
   /// In en, this message translates to:
   /// **'Enter your password'**
   String get auth_passwordHint;
+
+  /// Welcome screen badge text
+  ///
+  /// In en, this message translates to:
+  /// **'Peace'**
+  String get welcome_badge;
+
+  /// Welcome screen social proof stats
+  ///
+  /// In en, this message translates to:
+  /// **'Over 1 million people practice every day'**
+  String get welcome_stats;
+
+  /// Welcome screen greeting
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome to'**
+  String get welcome_greeting;
+
+  /// Welcome screen app name
+  ///
+  /// In en, this message translates to:
+  /// **'Meditation App'**
+  String get welcome_appName;
+
+  /// Welcome screen subtitle
+  ///
+  /// In en, this message translates to:
+  /// **'Start your journey to inner peace and find balance in your soul.'**
+  String get welcome_subtitle;
+
+  /// Welcome screen CTA button
+  ///
+  /// In en, this message translates to:
+  /// **'Get Started'**
+  String get welcome_cta;
+
+  /// Welcome screen copyright
+  ///
+  /// In en, this message translates to:
+  /// **'© 2024 Thiền Sanctuary'**
+  String get welcome_copyright;
+
+  /// Welcome screen privacy link
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy Policy'**
+  String get welcome_privacy;
+
+  /// Welcome screen terms link
+  ///
+  /// In en, this message translates to:
+  /// **'Terms of Use'**
+  String get welcome_terms;
 }
 
 class _SDelegate extends LocalizationsDelegate<S> {

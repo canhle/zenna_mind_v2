@@ -34,5 +34,16 @@
   "auth_login": "Đăng nhập",
   "auth_logout": "Đăng xuất",
   "auth_emailHint": "Nhập email của bạn",
-  "auth_passwordHint": "Nhập mật khẩu của bạn"
+  "auth_passwordHint": "Nhập mật khẩu của bạn",
+
+  "@@_WELCOME": "=============================================================",
+  "welcome_badge": "Bình an",
+  "welcome_stats": "Hơn 1 triệu người đang luyện tập mỗi ngày",
+  "welcome_greeting": "Chào mừng bạn đến với",
+  "welcome_appName": "Ứng dụng Thiền",
+  "welcome_subtitle": "Hãy bắt đầu hành trình bình an của bạn và tìm lại sự cân bằng trong tâm hồn.",
+  "welcome_cta": "Bắt đầu",
+  "welcome_copyright": "© 2024 Thiền Sanctuary",
+  "welcome_privacy": "Chính sách bảo mật",
+  "welcome_terms": "Điều khoản sử dụng"
 }

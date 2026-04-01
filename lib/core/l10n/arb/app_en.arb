@@ -57,5 +57,25 @@
   "auth_emailHint": "Enter your email",
   "@auth_emailHint": { "description": "Email input hint" },
   "auth_passwordHint": "Enter your password",
-  "@auth_passwordHint": { "description": "Password input hint" }
+  "@auth_passwordHint": { "description": "Password input hint" },
+
+  "@@_WELCOME": "=============================================================",
+  "welcome_badge": "Peace",
+  "@welcome_badge": { "description": "Welcome screen badge text" },
+  "welcome_stats": "Over 1 million people practice every day",
+  "@welcome_stats": { "description": "Welcome screen social proof stats" },
+  "welcome_greeting": "Welcome to",
+  "@welcome_greeting": { "description": "Welcome screen greeting" },
+  "welcome_appName": "Meditation App",
+  "@welcome_appName": { "description": "Welcome screen app name" },
+  "welcome_subtitle": "Start your journey to inner peace and find balance in your soul.",
+  "@welcome_subtitle": { "description": "Welcome screen subtitle" },
+  "welcome_cta": "Get Started",
+  "@welcome_cta": { "description": "Welcome screen CTA button" },
+  "welcome_copyright": "© 2024 Thiền Sanctuary",
+  "@welcome_copyright": { "description": "Welcome screen copyright" },
+  "welcome_privacy": "Privacy Policy",
+  "@welcome_privacy": { "description": "Welcome screen privacy link" },
+  "welcome_terms": "Terms of Use",
+  "@welcome_terms": { "description": "Welcome screen terms link" }
 }

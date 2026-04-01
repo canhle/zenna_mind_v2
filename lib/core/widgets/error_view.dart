@@ -16,7 +16,7 @@ class ErrorView extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(
-              DsIcons.error,
+              Icons.error,
               size: 48,
               color: Theme.of(context).colorScheme.error,
             ),

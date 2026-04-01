@@ -77,4 +77,32 @@ class SVi extends S {
 
   @override
   String get auth_passwordHint => 'Nhập mật khẩu của bạn';
+
+  @override
+  String get welcome_badge => 'Bình an';
+
+  @override
+  String get welcome_stats => 'Hơn 1 triệu người đang luyện tập mỗi ngày';
+
+  @override
+  String get welcome_greeting => 'Chào mừng bạn đến với';
+
+  @override
+  String get welcome_appName => 'Ứng dụng Thiền';
+
+  @override
+  String get welcome_subtitle =>
+      'Hãy bắt đầu hành trình bình an của bạn và tìm lại sự cân bằng trong tâm hồn.';
+
+  @override
+  String get welcome_cta => 'Bắt đầu';
+
+  @override
+  String get welcome_copyright => '© 2024 Thiền Sanctuary';
+
+  @override
+  String get welcome_privacy => 'Chính sách bảo mật';
+
+  @override
+  String get welcome_terms => 'Điều khoản sử dụng';
 }
