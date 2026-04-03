@@ -465,10 +465,23 @@ Extensions must be placed based on the **type they extend**, not grouped arbitra
 
 **Rules:**
 
-1. **`core/extensions/` is reserved for SDK types only.** One file per type, named `{type}_extensions.dart`.
-2. **Domain entity extensions go next to the entity** — placing them in `core/extensions/` would make `core/` depend on `domain/`, violating the dependency rule.
-3. **Feature-specific extensions stay in the feature.** If a second feature needs the same extension, promote it to the appropriate layer (`core/` or `domain/`).
-4. **Never create a catch-all `extensions.dart` file.** Each file extends exactly one type.
+1. **Always prefer extensions over direct calls.** Before calling `Theme.of(context)`, `MediaQuery.of(context)`, `Navigator.of(context)`, or similar, check if a context extension already exists in `core/extensions/`. Use the extension. Only call the framework method directly if no extension covers your use case.
+2. **`core/extensions/` is reserved for SDK types only.** One file per type, named `{type}_extensions.dart`.
+3. **Domain entity extensions go next to the entity** — placing them in `core/extensions/` would make `core/` depend on `domain/`, violating the dependency rule.
+4. **Feature-specific extensions stay in the feature.** If a second feature needs the same extension, promote it to the appropriate layer (`core/` or `domain/`).
+5. **Never create a catch-all `extensions.dart` file.** Each file extends exactly one type.
+
+```dart
+// ✓ Use context extensions — shorter, consistent, discoverable
+final textTheme = context.textTheme;
+final colors = context.colorScheme;
+final width = context.screenWidth;
+
+// ✗ Avoid — direct framework calls when extension exists
+final textTheme = Theme.of(context).textTheme;
+final colors = Theme.of(context).colorScheme;
+final width = MediaQuery.sizeOf(context).width;
+```
 
 ```dart
 // ✓ core/extensions/string_extensions.dart — SDK type, used everywhere
@@ -1126,7 +1139,51 @@ CachedNetworkImage(
 )
 ```
 
-### 5.4 `const` Constructor Usage
+### 5.4 Use `textTheme` for Typography
+
+Always use `context.textTheme` (from `context_extensions.dart`) as the base for text styling. Never hardcode `fontFamily` directly in feature code — font families are defined once in `DsTypography` and applied through the theme.
+
+```dart
+// ✗ Avoid — hardcoded fontFamily
+Text(
+  'Hello',
+  style: const TextStyle(
+    fontFamily: 'PlusJakartaSans',
+    fontSize: 30,
+    fontWeight: FontWeight.w800,
+    color: DsColors.onSurface,
+  ),
+)
+
+// ✗ Avoid — direct Theme.of() when extension exists (see §3.3 rule 1)
+Text(
+  'Hello',
+  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+    fontSize: 30,
+    fontWeight: FontWeight.w800,
+    color: DsColors.onSurface,
+  ),
+)
+
+// ✓ Correct — use context extension
+Text(
+  'Hello',
+  style: context.textTheme.headlineMedium?.copyWith(
+    fontSize: 30,
+    fontWeight: FontWeight.w800,
+    color: DsColors.onSurface,
+  ),
+)
+```
+
+**Mapping guide:**
+- Headings / titles → `headlineLarge`, `headlineMedium`, `headlineSmall`, `titleLarge` (PlusJakartaSans)
+- Body text / descriptions → `bodyLarge`, `bodyMedium`, `bodySmall` (Manrope)
+- Labels / captions / badges → `labelLarge`, `labelMedium`, `labelSmall` (Manrope)
+
+Only override `fontSize` or `fontWeight` via `copyWith` when the design requires values different from the theme defaults.
+
+### 5.5 `const` Constructor Usage
 
 Use `const` constructors wherever possible — especially for `SizedBox`, `Padding`, `EdgeInsets`, `BorderRadius`, and `TextStyle` literals.
 
@@ -1140,7 +1197,7 @@ const SizedBox(height: 16)
 const Padding(padding: EdgeInsets.all(20))
 ```
 
-### 5.5 Widget Keys on Lists
+### 5.6 Widget Keys on Lists
 
 When list items have a unique identifier, pass `key: ValueKey(item.id)` to the item widget in `ListView.builder`.
 
@@ -1155,7 +1212,7 @@ ListView.builder(
 )
 ```
 
-### 5.6 Prefer `StatelessWidget` Over Helper Functions
+### 5.7 Prefer `StatelessWidget` Over Helper Functions
 
 Extract reusable UI into separate widget classes rather than private `_buildXxx()` methods. Flutter can skip rebuilding a `const` widget subtree but cannot skip a helper function.
 
@@ -1176,7 +1233,7 @@ class _ProductListHeader extends StatelessWidget {
 
 For new screens, extract sub-widgets into a `components/` subfolder. Use `_buildXxx()` only for trivial, non-reusable sections.
 
-### 5.7 Localize State Rebuilds with `.select()`
+### 5.8 Localize State Rebuilds with `.select()`
 
 Sub-widgets should use `.select()` to subscribe only to the UiState fields they need.
 
@@ -1196,7 +1253,7 @@ class _PriceDisplay extends ConsumerWidget {
 }
 ```
 
-### 5.8 AnimatedBuilder Child Pattern
+### 5.9 AnimatedBuilder Child Pattern
 
 Pass expensive child widgets via the `child` parameter — not inside `builder`. The `child` is built once and reused across frames.
 
@@ -1214,7 +1271,7 @@ AnimatedBuilder(
 )
 ```
 
-### 5.9 Do Not Override `operator==` on Widgets
+### 5.10 Do Not Override `operator==` on Widgets
 
 Never override `operator==` on widget classes. Flutter's reconciliation relies on identity (`identical()`). Overriding `operator==` causes O(N²) performance degradation. Use `const` constructors instead.
 

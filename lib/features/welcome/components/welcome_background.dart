@@ -8,20 +8,22 @@ class WelcomeBackground extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DecoratedBox(
-      decoration: const BoxDecoration(
-        gradient: RadialGradient(
-          center: Alignment.topLeft,
-          radius: 1.5,
-          colors: [
-            DsColors.background, // #F0FDFA
-            DsColors.surfaceDim, // #E0F2F1
-            DsColors.background, // #F0FDFA
-          ],
-          stops: [0.0, 0.5, 1.0],
+    return SizedBox.expand(
+      child: DecoratedBox(
+        decoration: const BoxDecoration(
+          gradient: RadialGradient(
+            center: Alignment.topLeft,
+            radius: 1.5,
+            colors: [
+              DsColors.background, // #F0FDFA
+              DsColors.surfaceDim, // #E0F2F1
+              DsColors.background, // #F0FDFA
+            ],
+            stops: [0.0, 0.5, 1.0],
+          ),
         ),
+        child: child,
       ),
-      child: child,
     );
   }
 }

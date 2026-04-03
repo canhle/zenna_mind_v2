@@ -104,8 +104,10 @@ This checklist is derived from `coding-conventions.md`. Use it to review code be
 - [ ] `features/` is feature-first
 - [ ] Feature folder contains: screen, view_model, models/ (ui_state, arguments), components/
 
-## 5.3 Extension Placement
+## 5.3 Extension Placement & Usage
 
+- [ ] Uses context extensions (`context.textTheme`, `context.colorScheme`, `context.screenWidth`) instead of direct `Theme.of(context)` / `MediaQuery.of(context)` calls
+- [ ] Before calling a framework method directly, checked that no existing extension in `core/extensions/` covers the use case
 - [ ] SDK type extensions (`String`, `BuildContext`, etc.) → `core/extensions/`
 - [ ] Domain entity extensions → next to entity file in `domain/entities/`
 - [ ] 3rd-party lib extensions → next to the wrapper file
@@ -224,25 +226,31 @@ This checklist is derived from `coding-conventions.md`. Use it to review code be
 - [ ] Uses shared `Debouncer` class — no inline Timer-based debouncing
 - [ ] Default durations: 500ms for search/text input, 300ms for UI interactions
 
-## 12.3 Image Loading
+## 12.3 Typography
+
+- [ ] Uses `context.textTheme` (extension) as base for all text styles — NOT `Theme.of(context).textTheme`
+- [ ] No hardcoded `fontFamily` in feature code — font families come from `DsTypography` via theme
+- [ ] Only overrides `fontSize` / `fontWeight` via `copyWith` when design differs from theme defaults
+
+## 12.4 Image Loading
 
 - [ ] Uses `CachedNetworkImage` for remote images
 - [ ] Does NOT use `Image.network`
 
-## 12.4 Performance
+## 12.5 Performance
 
 - [ ] Uses `const` constructors wherever possible: `SizedBox`, `Padding`, `EdgeInsets`, `BorderRadius`, `TextStyle`
 - [ ] List items with unique ID use `key: ValueKey(item.id)`
 - [ ] Sub-widgets use `.select()` to subscribe only to needed UiState fields
 - [ ] `AnimatedBuilder`: expensive child passed via `child` parameter — not inside `builder`
 
-## 12.5 Widget Design
+## 12.6 Widget Design
 
 - [ ] Reusable UI extracted into separate widget classes (`StatelessWidget`)
 - [ ] `_buildXxx()` helper methods used only for trivial, non-reusable sections
 - [ ] New screens extract sub-widgets into `components/` subfolder
 
-## 12.6 Widget Equality
+## 12.7 Widget Equality
 
 - [ ] Never overrides `operator==` on widget classes — use `const` constructors instead
 
