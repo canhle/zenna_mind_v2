@@ -1303,3 +1303,60 @@ if (product.isOutOfStock) { /* out of stock */ }
 // core/constants/app_constants.dart
 const int freeShippingThreshold = 500000;
 ```
+
+---
+
+## 7. Security
+
+### 7.1 External HTML Content
+
+When rendering HTML from external sources (backend API, user-generated content), **always** use `SafeHtml` (`lib/components/atoms/safe_html.dart`) instead of the raw `Html` widget from `flutter_html`.
+
+`SafeHtml` provides:
+- **Tag allowlist** — only safe tags are rendered (`p`, `ul`, `li`, `a`, `b`, `strong`, etc.). All other tags are stripped via `HtmlSanitizer` (`lib/utils/html_sanitizer.dart`).
+- **Link validation** — only `https`, `http`, and `mailto` URL schemes are allowed. `javascript:`, `tel:`, `intent:`, and other schemes are blocked.
+
+```dart
+// ✗ Avoid — no sanitization, vulnerable to injection
+Html(
+  data: apiResponse.htmlContent,
+)
+
+// ✓ Correct — sanitized and link-validated
+SafeHtml(
+  data: apiResponse.htmlContent,
+  style: {
+    "body": Style(fontSize: FontSize(12)),
+  },
+)
+```
+
+Hardcoded HTML that never changes (e.g., local-only content) may use `Html` directly, but prefer `SafeHtml` for consistency.
+
+### 7.2 URL Handling
+
+When opening URLs from external data (API responses, deep links), validate the scheme before launching:
+
+```dart
+// ✗ Avoid — opens any URL scheme
+openURL(externalUrl);
+
+// ✓ Correct — validate scheme first
+final uri = Uri.tryParse(externalUrl);
+if (uri != null && {'https', 'http', 'mailto'}.contains(uri.scheme)) {
+  openURL(externalUrl);
+}
+```
+
+### 7.3 Sensitive Data
+
+- **Never** hardcode API keys, tokens, or credentials in source code. Use environment variables or secure storage.
+- **Never** log sensitive data (PII, tokens, passwords) — use redacted placeholders.
+- **Never** show raw error messages (`e.toString()`) to users — use localized error messages via error code enums (see §2.5).
+- Use `SharedPreferences` only for non-sensitive data. For sensitive data, use `flutter_secure_storage` or platform keychain.
+
+### 7.4 API Response Validation
+
+- Always deserialize API responses into typed Freezed models (see CLAUDE.md "API Response Models"). Never trust raw `Map<String, dynamic>` or `dynamic` types.
+- Validate required fields — handle `null` or unexpected values gracefully via Freezed defaults or nullable types.
+- Separate `on ApiError catch (e)` from generic `catch (_)` — never expose internal error details to users.
