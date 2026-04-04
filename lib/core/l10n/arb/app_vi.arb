@@ -68,5 +68,12 @@
   "home_navHome": "Home",
   "home_navBrowse": "Browse",
   "home_navFavorites": "Favorites",
-  "home_navSettings": "Settings"
+  "home_navSettings": "Settings",
+
+  "@@_BROWSER": "=============================================================",
+  "browser_searchHint": "Tìm bài thiền...",
+  "browser_trending": "Xu hướng",
+  "browser_viewAll": "XEM TẤT CẢ",
+  "browser_tabTopics": "Chủ đề",
+  "browser_tabMoods": "Cảm xúc"
 }

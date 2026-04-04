@@ -175,4 +175,19 @@ class SEn extends S {
 
   @override
   String get home_navSettings => 'Settings';
+
+  @override
+  String get browser_searchHint => 'Search meditations...';
+
+  @override
+  String get browser_trending => 'Trending';
+
+  @override
+  String get browser_viewAll => 'VIEW ALL';
+
+  @override
+  String get browser_tabTopics => 'Topics';
+
+  @override
+  String get browser_tabMoods => 'Moods';
 }

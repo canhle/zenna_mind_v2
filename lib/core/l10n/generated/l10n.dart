@@ -414,6 +414,36 @@ abstract class S {
   /// In en, this message translates to:
   /// **'Settings'**
   String get home_navSettings;
+
+  /// Browse search placeholder
+  ///
+  /// In en, this message translates to:
+  /// **'Search meditations...'**
+  String get browser_searchHint;
+
+  /// Browse trending section title
+  ///
+  /// In en, this message translates to:
+  /// **'Trending'**
+  String get browser_trending;
+
+  /// Browse view all link
+  ///
+  /// In en, this message translates to:
+  /// **'VIEW ALL'**
+  String get browser_viewAll;
+
+  /// Browse topics tab
+  ///
+  /// In en, this message translates to:
+  /// **'Topics'**
+  String get browser_tabTopics;
+
+  /// Browse moods tab
+  ///
+  /// In en, this message translates to:
+  /// **'Moods'**
+  String get browser_tabMoods;
 }
 
 class _SDelegate extends LocalizationsDelegate<S> {

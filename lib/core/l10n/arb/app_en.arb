@@ -121,5 +121,17 @@
   "home_navFavorites": "Favorites",
   "@home_navFavorites": { "description": "Bottom nav favorites tab" },
   "home_navSettings": "Settings",
-  "@home_navSettings": { "description": "Bottom nav settings tab" }
+  "@home_navSettings": { "description": "Bottom nav settings tab" },
+
+  "@@_BROWSER": "=============================================================",
+  "browser_searchHint": "Search meditations...",
+  "@browser_searchHint": { "description": "Browse search placeholder" },
+  "browser_trending": "Trending",
+  "@browser_trending": { "description": "Browse trending section title" },
+  "browser_viewAll": "VIEW ALL",
+  "@browser_viewAll": { "description": "Browse view all link" },
+  "browser_tabTopics": "Topics",
+  "@browser_tabTopics": { "description": "Browse topics tab" },
+  "browser_tabMoods": "Moods",
+  "@browser_tabMoods": { "description": "Browse moods tab" }
 }

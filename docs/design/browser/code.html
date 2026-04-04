@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+
+<html class="light" lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Digital Sanctuary - Khám phá</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;family=Manrope:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-dim": "#d0ddda",
+                        "on-background": "#121e1c",
+                        "surface-bright": "#effcf9",
+                        "on-secondary-container": "#006f67",
+                        "tertiary-fixed-dim": "#95d4b3",
+                        "on-primary": "#ffffff",
+                        "tertiary-container": "#448064",
+                        "on-secondary-fixed": "#00201d",
+                        "surface-container-highest": "#d8e5e2",
+                        "on-tertiary-fixed": "#002114",
+                        "on-surface": "#121e1c",
+                        "inverse-on-surface": "#e6f3f1",
+                        "surface-container-high": "#deebe8",
+                        "secondary-container": "#99efe5",
+                        "surface-tint": "#006a61",
+                        "surface-container-low": "#e9f6f3",
+                        "on-secondary-fixed-variant": "#00504a",
+                        "on-primary-container": "#f4fffc",
+                        "on-surface-variant": "#3d4947",
+                        "error-container": "#ffdad6",
+                        "primary": "#00685f",
+                        "inverse-surface": "#273331",
+                        "surface": "#effcf9",
+                        "secondary-fixed": "#9cf2e8",
+                        "on-tertiary-container": "#f5fff7",
+                        "inverse-primary": "#6bd8cb",
+                        "primary-container": "#008378",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed-variant": "#005049",
+                        "surface-variant": "#d8e5e2",
+                        "tertiary": "#2a674c",
+                        "primary-fixed": "#89f5e7",
+                        "secondary": "#006a63",
+                        "primary-fixed-dim": "#6bd8cb",
+                        "on-tertiary-fixed-variant": "#0e5138",
+                        "error": "#ba1a1a",
+                        "surface-container": "#e4f1ee",
+                        "outline": "#6d7a77",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed-dim": "#80d5cb",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed": "#b1f0ce",
+                        "on-tertiary": "#ffffff",
+                        "background": "#effcf9",
+                        "surface-container-lowest": "#ffffff",
+                        "outline-variant": "#bcc9c6",
+                        "on-primary-fixed": "#00201d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Manrope"],
+                        "label": ["Manrope"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .liquid-teal-gradient {
+            background: linear-gradient(135deg, #0D9488 0%, #CCFBF1 100%);
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface antialiased selection:bg-secondary-container">
+<main class="pt-8 pb-32 px-6 max-w-screen-xl mx-auto overflow-hidden">
+<!-- Search Bar (Moved to top) -->
+<div class="mb-10">
+<div class="relative group">
+<div class="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-primary/60 group-focus-within:text-primary transition-colors">search</span>
+</div>
+<input class="block w-full bg-white border-[1.5px] border-primary/10 rounded-[24px] py-5 pl-14 pr-6 focus:ring-4 focus:ring-primary/10 focus:border-primary/40 text-on-surface placeholder:text-outline-variant shadow-xl shadow-primary/5 transition-all outline-none" placeholder="Tìm bài thiền..." type="text"/>
+</div>
+</div>
+<!-- Section 1: Xu hướng -->
+<section class="mb-10">
+<div class="flex justify-between items-end mb-6">
+<h2 class="font-headline text-2xl font-bold tracking-[0.05rem] text-on-surface">Xu hướng</h2>
+<button class="text-primary text-sm font-semibold tracking-wider hover:opacity-70">XEM TẤT CẢ</button>
+</div>
+<div class="flex gap-6 overflow-x-auto no-scrollbar pb-4 snap-x">
+<!-- Large Card 1 -->
+<div class="min-w-[70%] md:min-w-[400px] aspect-[4/5] relative rounded-[32px] overflow-hidden snap-start shadow-xl group">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Ethereal abstract background with swirling soft teal and white smoke patterns, calm and peaceful mood" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC5uS7Lgexx0VL-wYs_vFEVTtA9baxEYy-brI5Q5wCQiILfOIsFLt2q0NY9r5WNSuvlCGlNGYHhdBJ1kwcyaInMlEHzzvQlq7kZ8hU4pD-Vm1o_dRF3GOm8eb462Gp7y7aVDKG4smm9jner_jRNghWLF78ZKc6zvbOG_05Oc9nhcHs16OfmB6jCHt_Vlpfw46zI0L5aGKD0JJbeN8tZzfncHR0P0D87joaCw2LPh-5YJd3fcuseTaqBbCkNMMfc8WFyhbA15Rv51RQ"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent"></div>
+<div class="absolute bottom-0 left-0 w-full p-8 glass-card rounded-t-[32px] translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+<span class="text-[10px] tracking-[0.2rem] text-primary-fixed font-bold uppercase mb-2 block">PHỔ BIẾN NHẤT</span>
+<h3 class="font-headline text-2xl font-bold text-white mb-4 leading-tight">Buổi sáng bình yên</h3>
+<div class="flex items-center gap-3 text-white/90 text-sm font-medium">
+<span class="material-symbols-outlined text-sm">schedule</span>
+<span>15 phút</span>
+<span class="w-1 h-1 rounded-full bg-white/60"></span>
+<span>Minh Anh</span>
+</div>
+</div>
+</div>
+<!-- Large Card 2 -->
+<div class="min-w-[70%] md:min-w-[400px] aspect-[4/5] relative rounded-[32px] overflow-hidden snap-start shadow-xl group">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Macro photography of dew drops on a tropical leaf, soft green and teal tones with shallow depth of field" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQ2xG4MjhVEuRKb2jbjaLjdTwj4h8A40f--68EMnpr-DOvOsETHY8X3gikTviri0H7Vz4GDXhW9yj1BLMbDSVIvwjyMeKpiy_R2E4JmFqBb5PVgNPBbVlHbX2bsNBfSYN-1bn1e-UtPtMMh5FQuJHSsIy7M3y3_0tbL4h7bFhOki9gbxyTTosbDs1Jk4Tb5m1h1fPFjomw6vBWoO-zNO9UzoGttoezNuhAP1LpVZEUf8AoFtCDcuvfKNFrygB3BHM7VOk0NN1RnxQ"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent"></div>
+<div class="absolute bottom-0 left-0 w-full p-8 glass-card rounded-t-[32px] translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+<span class="text-[10px] tracking-[0.2rem] text-primary-fixed font-bold uppercase mb-2 block">MỚI PHÁT HÀNH</span>
+<h3 class="font-headline text-2xl font-bold text-white mb-4 leading-tight">Kết nối thiên nhiên</h3>
+<div class="flex items-center gap-3 text-white/90 text-sm font-medium">
+<span class="material-symbols-outlined text-sm">schedule</span>
+<span>20 phút</span>
+<span class="w-1 h-1 rounded-full bg-white/60"></span>
+<span>Tuấn Kiệt</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Header Tabs (Moved here, distributed evenly) -->
+<div class="flex mb-12 border-b border-outline-variant/15">
+<button class="relative pb-4 flex-1 text-center text-primary font-headline font-semibold tracking-[0.05rem]">
+            Chủ đề
+            <div class="absolute bottom-0 left-0 w-full h-[2px] bg-primary rounded-full"></div>
+</button>
+<button class="pb-4 flex-1 text-center text-on-surface-variant/60 font-headline font-medium tracking-[0.05rem] hover:text-on-surface-variant transition-colors">
+            Cảm xúc
+        </button>
+</div>
+<!-- Section 2: Tiếng mưa & bão -->
+<section class="mb-12">
+<div class="flex justify-between items-end mb-6">
+<h2 class="font-headline text-xl font-bold tracking-[0.05rem] text-on-surface">Tiếng mưa &amp; bão</h2>
+<button class="text-primary text-sm font-semibold tracking-wider hover:opacity-70">XEM TẤT CẢ</button>
+</div>
+<div class="flex gap-4 overflow-x-auto no-scrollbar pb-4 snap-x">
+<!-- Small Card 1 -->
+<div class="min-w-[40%] md:min-w-[240px] aspect-[4/5] relative rounded-[24px] overflow-hidden snap-start shadow-md group">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Raindrops hitting a dark window pane at night, city lights blurred in the background with teal bokeh" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWiqOz-1w5dWVXkVt38G-WJv6DsG4e5lLOBrsroKScgRfhMZkX4drNTAQ4AcJ2gfeKuHbIWuDY-uOzR2cgEb-Eayr18a9htza9fbOWXXjanqkH0uZVGAiPORgIbhUsEt2RCM-zLGaipO65iOngrB41ZDBaTHnTPT5OdAB5J-j5N2qfRh-ik0qinqVg_oSjE3nGE99YtgellRljOvgGEjpkoHkm9zQvcPHzY_4pJmK_EiSlBhNNkLY4UZYkYHH_EWDX2frVnzl9CEs"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+<div class="absolute bottom-0 left-0 w-full p-5 glass-card rounded-t-[24px]">
+<span class="text-[8px] tracking-[0.1rem] text-primary-fixed font-bold uppercase mb-1 block">PHỔ BIẾN</span>
+<h4 class="font-headline text-base font-bold text-white mb-2">Mưa nhẹ nhàng</h4>
+<div class="flex items-center gap-2 text-white/90 text-[10px] font-medium">
+<span>15 phút</span>
+<span class="w-1 h-1 rounded-full bg-white/60"></span>
+<span>Thiên Nhiên</span>
+</div>
+</div>
+</div>
+<!-- Small Card 2 -->
+<div class="min-w-[40%] md:min-w-[240px] aspect-[4/5] relative rounded-[24px] overflow-hidden snap-start shadow-md group">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Distant lightning storm over a dark ocean at night, deep teal and navy sky with soft electric glows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3PQPfRDt6jlRYx8wj6qYWvzcqSRQcPr7qv8wBW-WjUsmjszhqte4b2GINTb5UCotU0N4V6yXcQPttC5-1vaJNRnQvXeznAnu4Zc9aY6qPEYTSEBSVIcFRyB-5xyYX2nYT1-nnxqo_lOmVGQpAOBn3_5sI_YDTpqwT0MobyBa54GE89qFWTdCwqC9EhceEQV70uJW6hEg45j2U7RFkakqXrnQrgbH7juBzNJ-0_CBax7Cr6ywM4V0vaFRqEB5eNn0UkzdTEB_9cy0"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+<div class="absolute bottom-0 left-0 w-full p-5 glass-card rounded-t-[24px]">
+<span class="text-[8px] tracking-[0.1rem] text-primary-fixed font-bold uppercase mb-1 block">MỚI</span>
+<h4 class="font-headline text-base font-bold text-white mb-2">Bão đêm xa xôi</h4>
+<div class="flex items-center gap-2 text-white/90 text-[10px] font-medium">
+<span>30 phút</span>
+<span class="w-1 h-1 rounded-full bg-white/60"></span>
+<span>White Noise</span>
+</div>
+</div>
+</div>
+<!-- Small Card 3 -->
+<div class="min-w-[40%] md:min-w-[240px] aspect-[4/5] relative rounded-[24px] overflow-hidden snap-start shadow-md group">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Rain falling in a dense tropical forest, lush green leaves dripping with water, atmospheric and misty" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBNoOXMTj16mmapQLTtMcKY_V3w2NmEjDDWIJ7TVSF2brstmFdy_PldVzX89Jw5q8pQPsisM3e4PYd2vm6EClIWsZsjInajKe51_Qt5Lz1AHCyYyLgQiawHzockoZo2W8Bjyeyh7hufpcgfC50PcvrHT3CfYg7XI-gAIL-amsggrO1ySh9hXXUijwxnhiFi6I1m0t7KXlrbWrqDpv-SfC8kSO2FcZhmpIDK0nIC1CF1pNShngA7u-S178u4BfoHkspXK37N0nfrmU"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+<div class="absolute bottom-0 left-0 w-full p-5 glass-card rounded-t-[24px]">
+<span class="text-[8px] tracking-[0.1rem] text-primary-fixed font-bold uppercase mb-1 block">GỢI Ý</span>
+<h4 class="font-headline text-base font-bold text-white mb-2">Rừng nhiệt đới</h4>
+<div class="flex items-center gap-2 text-white/90 text-[10px] font-medium">
+<span>25 phút</span>
+<span class="w-1 h-1 rounded-full bg-white/60"></span>
+<span>Sâu Lắng</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 3: Khám phá thể loại -->
+<section class="mb-8">
+<div class="flex justify-between items-end mb-6">
+<h2 class="font-headline text-xl font-bold tracking-[0.05rem] text-on-surface">Khám phá thể loại</h2>
+</div>
+<div class="flex gap-4 overflow-x-auto no-scrollbar pb-4 snap-x">
+<!-- Category Card 1 -->
+<div class="min-w-[40%] md:min-w-[240px] aspect-[4/5] relative rounded-[24px] overflow-hidden snap-start shadow-md group">
+<div class="absolute inset-0 liquid-teal-gradient opacity-80 group-hover:opacity-100 transition-opacity"></div>
+<img class="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-40" data-alt="abstract flowing liquid texture in light teal and sage green colors" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZh7McNlpRoHtALRGNwzOGlPuXRx1dXalgJjnKnFenwTIL9FqeOzgZzrw1nHKET-p5qL4RIVIIRELSCegMsx9c46wn2J92c12saaPmF6jfShGawbDb7Q17Vv9FaXz9Pou5dz7iH7Ww5JY_QBiEFLSnH4TRhBM4l5T3MANg4H0lafO8VDShyidRTuclYujzj9YDbTIAjNhYJZBJHpfIQv0yI5mYL2ugMAf6E2aqHF5RT2zGPRpFi6BrcSrDK0o5RnmyIaeX5-GHfOM"/>
+<div class="absolute inset-0 flex flex-col items-center justify-center p-6 text-center">
+<span class="material-symbols-outlined text-4xl text-white mb-3">spa</span>
+<h4 class="font-headline text-lg font-bold text-white">Thư giãn</h4>
+</div>
+</div>
+<!-- Category Card 2 -->
+<div class="min-w-[40%] md:min-w-[240px] aspect-[4/5] relative rounded-[24px] overflow-hidden snap-start shadow-md group">
+<div class="absolute inset-0 bg-tertiary-container opacity-80 group-hover:opacity-100 transition-opacity"></div>
+<img class="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-40" data-alt="minimalist mountain range silhouetted against a soft morning fog" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIj6UCYtcGLkJa3-T41x4PIYZrcjupJN-3uTR6tOHBpJHdLHv6x_worof1OMjuSlbPvJtQqSPuYPoH8TAemuV4ZLYTmwWvlIojftTsVT1ngZSq06g77K4tlKl4kwG9XFtjZ4I72iW7Q7fVfk49_4gqZu0tkTBNWUYMy96SP-Ew-jKGln8CA_j4BOpIzh_kl6GiDJ8BPW6ow4MCiGo9nLUBMSq1NAUkyPt9SM5Xn9n9NleeoUaDpsMXoeg66WhDKXJz1HjtEDLSg9Q"/>
+<div class="absolute inset-0 flex flex-col items-center justify-center p-6 text-center">
+<span class="material-symbols-outlined text-4xl text-white mb-3">self_improvement</span>
+<h4 class="font-headline text-lg font-bold text-white">Chuyên sâu</h4>
+</div>
+</div>
+<!-- Category Card 3 -->
+<div class="min-w-[40%] md:min-w-[240px] aspect-[4/5] relative rounded-[24px] overflow-hidden snap-start shadow-md group">
+<div class="absolute inset-0 bg-secondary opacity-80 group-hover:opacity-100 transition-opacity"></div>
+<img class="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-40" data-alt="soft abstract waves of light filtering through water surface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA05B1TAQ0j-77jJS6q_9g4Z3lNN0hjbAF5Quz30kop1qNFVsTwP9AxX4Qql06d-EczByJwF_pQ3Z75V3aMPfKLp2WSyDGeXhS7mwha4QhcLOLK37UuzJHAnlDgshTlNxUY_0TXgMy4H3JWTptQqnDbGmS20-crZzYNf6VSdrvzFQoA4hUIjoUa9i9tLecFLWAtJuS0sHZizkzQsDcn6mSdqgrtWlL90uU8RSLk953tVyxTLWZTGX9EFjr4QxpvTkolN_jkqyLs9gI"/>
+<div class="absolute inset-0 flex flex-col items-center justify-center p-6 text-center">
+<span class="material-symbols-outlined text-4xl text-white mb-3">bedtime</span>
+<h4 class="font-headline text-lg font-bold text-white">Dễ ngủ</h4>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar Shell -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-6 pt-3 bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl rounded-t-[32px] z-50 shadow-[0_-10px_40px_rgba(13,148,136,0.08)]">
+<!-- Discover - Active -->
+<a class="flex flex-col items-center justify-center bg-teal-100/50 dark:bg-teal-900/40 text-teal-800 dark:text-teal-100 rounded-2xl px-5 py-2 transition-all duration-500 ease-in-out" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">explore</span>
+<span class="font-['Manrope'] text-[10px] font-light tracking-wider mt-1">Discover</span>
+</a>
+<!-- Meditate -->
+<a class="flex flex-col items-center justify-center text-teal-400 dark:text-slate-500 px-5 py-2 hover:text-teal-700 dark:hover:text-teal-300 transition-all duration-500 ease-in-out" href="#">
+<span class="material-symbols-outlined">self_improvement</span>
+<span class="font-['Manrope'] text-[10px] font-light tracking-wider mt-1">Meditate</span>
+</a>
+<!-- Sleep -->
+<a class="flex flex-col items-center justify-center text-teal-400 dark:text-slate-500 px-5 py-2 hover:text-teal-700 dark:hover:text-teal-300 transition-all duration-500 ease-in-out" href="#">
+<span class="material-symbols-outlined">bedtime</span>
+<span class="font-['Manrope'] text-[10px] font-light tracking-wider mt-1">Sleep</span>
+</a>
+<!-- Profile -->
+<a class="flex flex-col items-center justify-center text-teal-400 dark:text-slate-500 px-5 py-2 hover:text-teal-700 dark:hover:text-teal-300 transition-all duration-500 ease-in-out" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-['Manrope'] text-[10px] font-light tracking-wider mt-1">Profile</span>
+</a>
+</nav>
+</body></html>

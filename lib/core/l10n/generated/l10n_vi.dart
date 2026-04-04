@@ -176,4 +176,19 @@ class SVi extends S {
 
   @override
   String get home_navSettings => 'Settings';
+
+  @override
+  String get browser_searchHint => 'Tìm bài thiền...';
+
+  @override
+  String get browser_trending => 'Xu hướng';
+
+  @override
+  String get browser_viewAll => 'XEM TẤT CẢ';
+
+  @override
+  String get browser_tabTopics => 'Chủ đề';
+
+  @override
+  String get browser_tabMoods => 'Cảm xúc';
 }
