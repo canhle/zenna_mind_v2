@@ -288,6 +288,132 @@ abstract class S {
   /// In en, this message translates to:
   /// **'Terms of Use'**
   String get welcome_terms;
+
+  /// Home screen app name in app bar
+  ///
+  /// In en, this message translates to:
+  /// **'DIGITAL SANCTUARY'**
+  String get home_appName;
+
+  /// Morning greeting
+  ///
+  /// In en, this message translates to:
+  /// **'Good morning, {name} 🌤️'**
+  String home_greetingMorning(String name);
+
+  /// Afternoon greeting
+  ///
+  /// In en, this message translates to:
+  /// **'Good afternoon, {name} ☀️'**
+  String home_greetingAfternoon(String name);
+
+  /// Evening greeting
+  ///
+  /// In en, this message translates to:
+  /// **'Good evening, {name} 🌙'**
+  String home_greetingEvening(String name);
+
+  /// Home greeting subtitle
+  ///
+  /// In en, this message translates to:
+  /// **'Take a deep breath...'**
+  String get home_greetingSubtitle;
+
+  /// Mood selector section label
+  ///
+  /// In en, this message translates to:
+  /// **'HOW ARE YOU FEELING?'**
+  String get home_moodLabel;
+
+  /// Happy mood label
+  ///
+  /// In en, this message translates to:
+  /// **'Happy'**
+  String get home_moodHappy;
+
+  /// Anxious mood label
+  ///
+  /// In en, this message translates to:
+  /// **'Anxious'**
+  String get home_moodAnxious;
+
+  /// Tired mood label
+  ///
+  /// In en, this message translates to:
+  /// **'Tired'**
+  String get home_moodTired;
+
+  /// Stressed mood label
+  ///
+  /// In en, this message translates to:
+  /// **'Stressed'**
+  String get home_moodStressed;
+
+  /// Peaceful mood label
+  ///
+  /// In en, this message translates to:
+  /// **'Peaceful'**
+  String get home_moodPeaceful;
+
+  /// Daily meditation card label
+  ///
+  /// In en, this message translates to:
+  /// **'TODAY\'S EXERCISE'**
+  String get home_dailyLabel;
+
+  /// Start meditation button
+  ///
+  /// In en, this message translates to:
+  /// **'Start'**
+  String get home_startButton;
+
+  /// Continue listening card title
+  ///
+  /// In en, this message translates to:
+  /// **'Continue listening'**
+  String get home_continueTitle;
+
+  /// Daily streak card title
+  ///
+  /// In en, this message translates to:
+  /// **'Daily streak'**
+  String get home_streakTitle;
+
+  /// Daily streak count
+  ///
+  /// In en, this message translates to:
+  /// **'{count} days in a row'**
+  String home_streakCount(int count);
+
+  /// Streak week label
+  ///
+  /// In en, this message translates to:
+  /// **'THIS WEEK'**
+  String get home_streakWeek;
+
+  /// Bottom nav home tab
+  ///
+  /// In en, this message translates to:
+  /// **'Home'**
+  String get home_navHome;
+
+  /// Bottom nav browse tab
+  ///
+  /// In en, this message translates to:
+  /// **'Browse'**
+  String get home_navBrowse;
+
+  /// Bottom nav favorites tab
+  ///
+  /// In en, this message translates to:
+  /// **'Favorites'**
+  String get home_navFavorites;
+
+  /// Bottom nav settings tab
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get home_navSettings;
 }
 
 class _SDelegate extends LocalizationsDelegate<S> {

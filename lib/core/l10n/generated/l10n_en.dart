@@ -104,4 +104,75 @@ class SEn extends S {
 
   @override
   String get welcome_terms => 'Terms of Use';
+
+  @override
+  String get home_appName => 'DIGITAL SANCTUARY';
+
+  @override
+  String home_greetingMorning(String name) {
+    return 'Good morning, $name 🌤️';
+  }
+
+  @override
+  String home_greetingAfternoon(String name) {
+    return 'Good afternoon, $name ☀️';
+  }
+
+  @override
+  String home_greetingEvening(String name) {
+    return 'Good evening, $name 🌙';
+  }
+
+  @override
+  String get home_greetingSubtitle => 'Take a deep breath...';
+
+  @override
+  String get home_moodLabel => 'HOW ARE YOU FEELING?';
+
+  @override
+  String get home_moodHappy => 'Happy';
+
+  @override
+  String get home_moodAnxious => 'Anxious';
+
+  @override
+  String get home_moodTired => 'Tired';
+
+  @override
+  String get home_moodStressed => 'Stressed';
+
+  @override
+  String get home_moodPeaceful => 'Peaceful';
+
+  @override
+  String get home_dailyLabel => 'TODAY\'S EXERCISE';
+
+  @override
+  String get home_startButton => 'Start';
+
+  @override
+  String get home_continueTitle => 'Continue listening';
+
+  @override
+  String get home_streakTitle => 'Daily streak';
+
+  @override
+  String home_streakCount(int count) {
+    return '$count days in a row';
+  }
+
+  @override
+  String get home_streakWeek => 'THIS WEEK';
+
+  @override
+  String get home_navHome => 'Home';
+
+  @override
+  String get home_navBrowse => 'Browse';
+
+  @override
+  String get home_navFavorites => 'Favorites';
+
+  @override
+  String get home_navSettings => 'Settings';
 }

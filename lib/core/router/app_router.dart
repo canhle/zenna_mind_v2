@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:flutter_clean_template/features/product_list/models/product_list_arguments.dart';
-import 'package:flutter_clean_template/features/product_list/product_list_screen.dart';
+import 'package:flutter_clean_template/core/widgets/app_scaffold.dart';
+import 'package:flutter_clean_template/features/browse/browse_screen.dart';
+import 'package:flutter_clean_template/features/favorites/favorites_screen.dart';
+import 'package:flutter_clean_template/features/home/home_screen.dart';
+import 'package:flutter_clean_template/features/settings/settings_screen.dart';
 import 'package:flutter_clean_template/features/welcome/welcome_screen.dart';
 
 part 'app_router.g.dart';
@@ -11,8 +14,9 @@ part 'app_router.g.dart';
 abstract class AppRoutes {
   static const String welcome = '/';
   static const String home = '/home';
-  static const String productList = '/products';
-  static const String productDetail = '/products/:id';
+  static const String browse = '/browse';
+  static const String favorites = '/favorites';
+  static const String settings = '/settings';
 }
 
 @riverpod
@@ -25,31 +29,37 @@ GoRouter appRouter(Ref ref) {
         path: AppRoutes.welcome,
         builder: (_, __) => const WelcomeScreen(),
       ),
-      GoRoute(
-        path: AppRoutes.home,
-        builder: (_, __) => const ProductListScreen(
-          args: ProductListArguments(categoryId: ''),
+      StatefulShellRoute.indexedStack(
+        builder: (context, state, navigationShell) => AppScaffold(
+          navigationShell: navigationShell,
         ),
+        branches: [
+          StatefulShellBranch(routes: [
+            GoRoute(
+              path: AppRoutes.home,
+              builder: (_, __) => const HomeScreen(),
+            ),
+          ]),
+          StatefulShellBranch(routes: [
+            GoRoute(
+              path: AppRoutes.browse,
+              builder: (_, __) => const BrowseScreen(),
+            ),
+          ]),
+          StatefulShellBranch(routes: [
+            GoRoute(
+              path: AppRoutes.favorites,
+              builder: (_, __) => const FavoritesScreen(),
+            ),
+          ]),
+          StatefulShellBranch(routes: [
+            GoRoute(
+              path: AppRoutes.settings,
+              builder: (_, __) => const SettingsScreen(),
+            ),
+          ]),
+        ],
       ),
-      GoRoute(
-        path: AppRoutes.productList,
-        builder: (_, state) {
-          final categoryId =
-              state.uri.queryParameters['categoryId'] ?? '';
-          return ProductListScreen(
-            args: ProductListArguments(categoryId: categoryId),
-          );
-        },
-      ),
-      // TODO: Add more routes as features are created
-      // GoRoute(
-      //   path: AppRoutes.productDetail,
-      //   builder: (_, state) => ProductDetailScreen(
-      //     args: ProductDetailArguments(
-      //       productId: state.pathParameters['id']!,
-      //     ),
-      //   ),
-      // ),
     ],
     errorBuilder: (_, __) => const _NotFoundScreen(),
   );

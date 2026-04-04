@@ -105,4 +105,75 @@ class SVi extends S {
 
   @override
   String get welcome_terms => 'Điều khoản sử dụng';
+
+  @override
+  String get home_appName => 'DIGITAL SANCTUARY';
+
+  @override
+  String home_greetingMorning(String name) {
+    return 'Chào buổi sáng, $name 🌤️';
+  }
+
+  @override
+  String home_greetingAfternoon(String name) {
+    return 'Chào buổi chiều, $name ☀️';
+  }
+
+  @override
+  String home_greetingEvening(String name) {
+    return 'Chào buổi tối, $name 🌙';
+  }
+
+  @override
+  String get home_greetingSubtitle => 'Hít một hơi thật sâu...';
+
+  @override
+  String get home_moodLabel => 'BẠN CẢM THẤY THẾ NÀO?';
+
+  @override
+  String get home_moodHappy => 'Vui';
+
+  @override
+  String get home_moodAnxious => 'Lo lắng';
+
+  @override
+  String get home_moodTired => 'Mệt mỏi';
+
+  @override
+  String get home_moodStressed => 'Căng thẳng';
+
+  @override
+  String get home_moodPeaceful => 'Bình yên';
+
+  @override
+  String get home_dailyLabel => 'BÀI TẬP HÔM NAY';
+
+  @override
+  String get home_startButton => 'Bắt đầu';
+
+  @override
+  String get home_continueTitle => 'Tiếp tục nghe';
+
+  @override
+  String get home_streakTitle => 'Chuỗi hằng ngày';
+
+  @override
+  String home_streakCount(int count) {
+    return '$count ngày liên tiếp';
+  }
+
+  @override
+  String get home_streakWeek => 'TUẦN NÀY';
+
+  @override
+  String get home_navHome => 'Home';
+
+  @override
+  String get home_navBrowse => 'Browse';
+
+  @override
+  String get home_navFavorites => 'Favorites';
+
+  @override
+  String get home_navSettings => 'Settings';
 }
