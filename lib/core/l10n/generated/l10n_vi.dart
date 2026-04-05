@@ -194,4 +194,48 @@ class SVi extends S {
 
   @override
   String get player_nowPlaying => 'ĐANG PHÁT';
+
+  @override
+  String get streak_title => 'Duy trì thói quen';
+
+  @override
+  String get streak_days => 'ngày';
+
+  @override
+  String get streak_minutes => 'phút';
+
+  @override
+  String get streak_today => 'HÔM NAY';
+
+  @override
+  String get streak_suggestLabel => 'GỢI Ý HÔM NAY';
+
+  @override
+  String get streak_notDoneYet => 'Chưa thiền hôm nay';
+
+  @override
+  String get streak_completed => 'Đã hoàn thành ✓';
+
+  @override
+  String streak_dayCount(int count) {
+    return 'Ngày $count';
+  }
+
+  @override
+  String get streak_startToday => 'Bắt đầu thiền hôm nay';
+
+  @override
+  String get streak_doAnother => 'Thiền thêm một bài nữa';
+
+  @override
+  String get streak_goHome => 'Quay lại trang chủ';
+
+  @override
+  String get streak_duration => 'THỜI GIAN';
+
+  @override
+  String get streak_breathCycles => 'VÒNG THỞ';
+
+  @override
+  String get streak_mood => 'CẢM XÚC';
 }

@@ -78,5 +78,21 @@
   "browser_tabMoods": "Cảm xúc",
 
   "@@_PLAYER": "==============================================================",
-  "player_nowPlaying": "ĐANG PHÁT"
+  "player_nowPlaying": "ĐANG PHÁT",
+
+  "@@_STREAK": "==============================================================",
+  "streak_title": "Duy trì thói quen",
+  "streak_days": "ngày",
+  "streak_minutes": "phút",
+  "streak_today": "HÔM NAY",
+  "streak_suggestLabel": "GỢI Ý HÔM NAY",
+  "streak_notDoneYet": "Chưa thiền hôm nay",
+  "streak_completed": "Đã hoàn thành ✓",
+  "streak_dayCount": "Ngày {count}",
+  "streak_startToday": "Bắt đầu thiền hôm nay",
+  "streak_doAnother": "Thiền thêm một bài nữa",
+  "streak_goHome": "Quay lại trang chủ",
+  "streak_duration": "THỜI GIAN",
+  "streak_breathCycles": "VÒNG THỞ",
+  "streak_mood": "CẢM XÚC"
 }

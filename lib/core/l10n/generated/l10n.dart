@@ -450,6 +450,90 @@ abstract class S {
   /// In en, this message translates to:
   /// **'NOW PLAYING'**
   String get player_nowPlaying;
+
+  /// Streak screen title
+  ///
+  /// In en, this message translates to:
+  /// **'Build your habit'**
+  String get streak_title;
+
+  /// Streak days label
+  ///
+  /// In en, this message translates to:
+  /// **'days'**
+  String get streak_days;
+
+  /// Streak minutes label
+  ///
+  /// In en, this message translates to:
+  /// **'min'**
+  String get streak_minutes;
+
+  /// Streak today label
+  ///
+  /// In en, this message translates to:
+  /// **'TODAY'**
+  String get streak_today;
+
+  /// Streak suggestion label
+  ///
+  /// In en, this message translates to:
+  /// **'TODAY\'S SUGGESTION'**
+  String get streak_suggestLabel;
+
+  /// Streak not done status
+  ///
+  /// In en, this message translates to:
+  /// **'Not meditated yet'**
+  String get streak_notDoneYet;
+
+  /// Streak completed status
+  ///
+  /// In en, this message translates to:
+  /// **'Completed ✓'**
+  String get streak_completed;
+
+  /// Streak day count badge
+  ///
+  /// In en, this message translates to:
+  /// **'Day {count}'**
+  String streak_dayCount(int count);
+
+  /// Streak start CTA
+  ///
+  /// In en, this message translates to:
+  /// **'Start meditating today'**
+  String get streak_startToday;
+
+  /// Streak do another CTA
+  ///
+  /// In en, this message translates to:
+  /// **'Meditate one more session'**
+  String get streak_doAnother;
+
+  /// Streak go home CTA
+  ///
+  /// In en, this message translates to:
+  /// **'Back to home'**
+  String get streak_goHome;
+
+  /// Streak stat duration label
+  ///
+  /// In en, this message translates to:
+  /// **'DURATION'**
+  String get streak_duration;
+
+  /// Streak stat breath cycles label
+  ///
+  /// In en, this message translates to:
+  /// **'BREATH CYCLES'**
+  String get streak_breathCycles;
+
+  /// Streak stat mood label
+  ///
+  /// In en, this message translates to:
+  /// **'MOOD'**
+  String get streak_mood;
 }
 
 class _SDelegate extends LocalizationsDelegate<S> {

@@ -193,4 +193,48 @@ class SEn extends S {
 
   @override
   String get player_nowPlaying => 'NOW PLAYING';
+
+  @override
+  String get streak_title => 'Build your habit';
+
+  @override
+  String get streak_days => 'days';
+
+  @override
+  String get streak_minutes => 'min';
+
+  @override
+  String get streak_today => 'TODAY';
+
+  @override
+  String get streak_suggestLabel => 'TODAY\'S SUGGESTION';
+
+  @override
+  String get streak_notDoneYet => 'Not meditated yet';
+
+  @override
+  String get streak_completed => 'Completed ✓';
+
+  @override
+  String streak_dayCount(int count) {
+    return 'Day $count';
+  }
+
+  @override
+  String get streak_startToday => 'Start meditating today';
+
+  @override
+  String get streak_doAnother => 'Meditate one more session';
+
+  @override
+  String get streak_goHome => 'Back to home';
+
+  @override
+  String get streak_duration => 'DURATION';
+
+  @override
+  String get streak_breathCycles => 'BREATH CYCLES';
+
+  @override
+  String get streak_mood => 'MOOD';
 }

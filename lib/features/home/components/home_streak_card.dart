@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:flutter_clean_template/core/extensions/context_extensions.dart';
 import 'package:flutter_clean_template/core/l10n/generated/l10n.dart';
+import 'package:flutter_clean_template/core/router/app_router.dart';
 import 'package:flutter_clean_template/design_system/tokens/ds_colors.dart';
 import 'package:flutter_clean_template/design_system/tokens/ds_radius.dart';
 import 'package:flutter_clean_template/design_system/tokens/ds_spacing.dart';
@@ -20,13 +22,15 @@ class HomeStreakCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = S.of(context)!;
 
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        color: DsColors.surfaceContainerLow,
-        borderRadius: DsRadius.borderRadiusLg,
-        border: Border.all(color: _borderColor),
-      ),
-      child: Padding(
+    return GestureDetector(
+      onTap: () => context.push(AppRoutes.streak),
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          color: DsColors.surfaceContainerLow,
+          borderRadius: DsRadius.borderRadiusLg,
+          border: Border.all(color: _borderColor),
+        ),
+        child: Padding(
         padding: const EdgeInsets.all(DsSpacing.lg),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -98,6 +102,7 @@ class HomeStreakCard extends StatelessWidget {
             ),
           ],
         ),
+      ),
       ),
     );
   }
