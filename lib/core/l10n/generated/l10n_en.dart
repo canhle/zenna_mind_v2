@@ -190,4 +190,7 @@ class SEn extends S {
 
   @override
   String get browser_tabMoods => 'Moods';
+
+  @override
+  String get player_nowPlaying => 'NOW PLAYING';
 }

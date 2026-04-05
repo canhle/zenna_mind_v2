@@ -8,9 +8,10 @@ import 'package:flutter_clean_template/design_system/tokens/ds_spacing.dart';
 import 'package:flutter_clean_template/features/browse/models/browse_mock_data.dart';
 
 class BrowseContentCard extends StatelessWidget {
-  const BrowseContentCard({super.key, required this.item});
+  const BrowseContentCard({super.key, required this.item, this.onTap});
 
   final BrowseMeditationItem item;
+  final VoidCallback? onTap;
 
   static final _glassBg = Colors.white.withValues(alpha: 0.40);
   static final _glassBorder = Colors.white.withValues(alpha: 0.20);
@@ -20,9 +21,11 @@ class BrowseContentCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AspectRatio(
-      aspectRatio: 4 / 5,
-      child: ClipRRect(
+    return GestureDetector(
+      onTap: onTap,
+      child: AspectRatio(
+        aspectRatio: 4 / 5,
+        child: ClipRRect(
         borderRadius: BorderRadius.circular(DsRadius.xl),
         child: Stack(
           fit: StackFit.expand,
@@ -131,6 +134,7 @@ class BrowseContentCard extends StatelessWidget {
             ),
           ],
         ),
+      ),
       ),
     );
   }

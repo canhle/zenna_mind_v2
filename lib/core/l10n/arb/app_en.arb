@@ -133,5 +133,9 @@
   "browser_tabTopics": "Topics",
   "@browser_tabTopics": { "description": "Browse topics tab" },
   "browser_tabMoods": "Moods",
-  "@browser_tabMoods": { "description": "Browse moods tab" }
+  "@browser_tabMoods": { "description": "Browse moods tab" },
+
+  "@@_PLAYER": "==============================================================",
+  "player_nowPlaying": "NOW PLAYING",
+  "@player_nowPlaying": { "description": "Player now playing label" }
 }

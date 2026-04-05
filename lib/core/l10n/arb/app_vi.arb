@@ -75,5 +75,8 @@
   "browser_trending": "Xu hướng",
   "browser_viewAll": "XEM TẤT CẢ",
   "browser_tabTopics": "Chủ đề",
-  "browser_tabMoods": "Cảm xúc"
+  "browser_tabMoods": "Cảm xúc",
+
+  "@@_PLAYER": "==============================================================",
+  "player_nowPlaying": "ĐANG PHÁT"
 }

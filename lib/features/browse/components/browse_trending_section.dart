@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:flutter_clean_template/core/router/app_router.dart';
 import 'package:flutter_clean_template/design_system/tokens/ds_spacing.dart';
 import 'package:flutter_clean_template/features/browse/components/browse_trending_card.dart';
 import 'package:flutter_clean_template/features/browse/models/browse_mock_data.dart';
@@ -22,7 +24,10 @@ class BrowseTrendingSection extends StatelessWidget {
         itemBuilder: (_, index) {
           return SizedBox(
             width: cardWidth,
-            child: BrowseTrendingCard(item: mockTrendingItems[index]),
+            child: BrowseTrendingCard(
+              item: mockTrendingItems[index],
+              onTap: () => context.push(AppRoutes.player),
+            ),
           );
         },
       ),

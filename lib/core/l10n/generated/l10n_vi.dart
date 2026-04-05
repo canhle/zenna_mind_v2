@@ -191,4 +191,7 @@ class SVi extends S {
 
   @override
   String get browser_tabMoods => 'Cảm xúc';
+
+  @override
+  String get player_nowPlaying => 'ĐANG PHÁT';
 }

@@ -7,6 +7,7 @@ import 'package:flutter_clean_template/features/browse/browse_screen.dart';
 import 'package:flutter_clean_template/features/favorites/favorites_screen.dart';
 import 'package:flutter_clean_template/features/home/home_screen.dart';
 import 'package:flutter_clean_template/features/settings/settings_screen.dart';
+import 'package:flutter_clean_template/features/player/player_screen.dart';
 import 'package:flutter_clean_template/features/welcome/welcome_screen.dart';
 
 part 'app_router.g.dart';
@@ -17,6 +18,7 @@ abstract class AppRoutes {
   static const String browse = '/browse';
   static const String favorites = '/favorites';
   static const String settings = '/settings';
+  static const String player = '/player';
 }
 
 @riverpod
@@ -28,6 +30,10 @@ GoRouter appRouter(Ref ref) {
       GoRoute(
         path: AppRoutes.welcome,
         builder: (_, __) => const WelcomeScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.player,
+        builder: (_, __) => const PlayerScreen(),
       ),
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) => AppScaffold(

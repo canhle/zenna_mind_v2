@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:flutter_clean_template/core/router/app_router.dart';
 import 'package:flutter_clean_template/design_system/tokens/ds_spacing.dart';
 import 'package:flutter_clean_template/features/browse/components/browse_content_card.dart';
 import 'package:flutter_clean_template/features/browse/models/browse_mock_data.dart';
@@ -24,7 +26,10 @@ class BrowseContentSection extends StatelessWidget {
         itemBuilder: (_, index) {
           return SizedBox(
             width: cardWidth,
-            child: BrowseContentCard(item: items[index]),
+            child: BrowseContentCard(
+              item: items[index],
+              onTap: () => context.push(AppRoutes.player),
+            ),
           );
         },
       ),

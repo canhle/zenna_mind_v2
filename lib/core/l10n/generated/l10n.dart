@@ -444,6 +444,12 @@ abstract class S {
   /// In en, this message translates to:
   /// **'Moods'**
   String get browser_tabMoods;
+
+  /// Player now playing label
+  ///
+  /// In en, this message translates to:
+  /// **'NOW PLAYING'**
+  String get player_nowPlaying;
 }
 
 class _SDelegate extends LocalizationsDelegate<S> {
