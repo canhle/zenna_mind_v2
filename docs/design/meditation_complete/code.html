@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meditation – Completion</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:          #bfe4d8;
+    --blob:        rgba(255,255,255,0.17);
+    --text-main:   #0a3d28;
+    --text-muted:  rgba(10,60,40,0.58);
+    --text-hint:   rgba(10,60,40,0.40);
+    --ring-outer:  rgba(10,100,70,0.18);
+    --ring-mid:    rgba(10,100,70,0.12);
+    --ring-core:   rgba(255,255,255,0.55);
+    --dot-color:   rgba(10,120,70,0.28);
+    --badge-bg:    rgba(255,255,255,0.55);
+    --badge-border:rgba(10,100,60,0.20);
+    --mood-bg:     rgba(255,255,255,0.35);
+    --mood-sel-bg: rgba(255,255,255,0.65);
+    --mood-sel-bd: rgba(10,100,60,0.35);
+    --btn-primary: #0d6e4a;
+    --btn-primary-hover: #0a5c3d;
+    --btn-sec-border: rgba(10,100,60,0.25);
+  }
+
+  body {
+    min-height: 100vh;
+    background: #e8f5f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .phone {
+    width: 360px;
+    min-height: 700px;
+    background: var(--bg);
+    border-radius: 44px;
+    overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.07);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  .blob {
+    position: absolute;
+    border-radius: 50%;
+    background: var(--blob);
+    pointer-events: none;
+  }
+  .blob-1 { width: 320px; height: 320px; top: -100px; left: -90px; }
+  .blob-2 { width: 200px; height: 200px; bottom: -60px; right: -55px; }
+
+  .content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 0 30px 32px;
+    flex: 1;
+  }
+
+  /* Status bar */
+  .status-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0 0;
+    flex-shrink: 0;
+  }
+  .status-time { font-size: 12px; color: var(--text-hint); letter-spacing: 0.03em; }
+  .status-icons { display: flex; gap: 12px; align-items: center; }
+
+  /* Celebration */
+  .celebration {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 16px 0 8px;
+  }
+
+  /* Animated ring */
+  .ring-wrap {
+    position: relative;
+    width: 148px; height: 148px;
+    margin-bottom: 28px;
+  }
+  .ring-outer {
+    position: absolute; inset: 0;
+    border-radius: 50%;
+    border: 1.5px solid var(--ring-outer);
+    animation: expand 3s ease-in-out infinite;
+  }
+  .ring-mid {
+    position: absolute; inset: 17px;
+    border-radius: 50%;
+    border: 1px solid var(--ring-mid);
+    animation: expand 3s ease-in-out infinite 0.4s;
+  }
+  .ring-core {
+    position: absolute; inset: 34px;
+    border-radius: 50%;
+    background: var(--ring-core);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .ring-icon {
+    width: 46px; height: 46px;
+    border-radius: 50%;
+    background: var(--btn-primary);
+    display: flex; align-items: center; justify-content: center;
+    animation: popIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both 0.1s;
+  }
+
+  /* Floating dots */
+  .dot {
+    position: absolute;
+    border-radius: 50%;
+    background: var(--dot-color);
+    animation: float 4s ease-in-out infinite;
+  }
+  .d1 { width: 8px;  height: 8px;  top: 5px;   left: 28px;  animation-delay: 0s; }
+  .d2 { width: 6px;  height: 6px;  top: 18px;  right: 22px; animation-delay: 0.7s; }
+  .d3 { width: 7px;  height: 7px;  bottom: 14px; left: 16px; animation-delay: 1.2s; }
+  .d4 { width: 5px;  height: 5px;  bottom: 26px; right: 30px; animation-delay: 1.8s; }
+  .d5 { width: 5px;  height: 5px;  top: 48%;  left: 2px;   animation-delay: 0.4s; }
+
+  @keyframes expand {
+    0%, 100% { opacity: 0.6; transform: scale(1); }
+    50%       { opacity: 1;   transform: scale(1.05); }
+  }
+  @keyframes popIn {
+    from { transform: scale(0); opacity: 0; }
+    to   { transform: scale(1); opacity: 1; }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0);   opacity: 0.4; }
+    50%       { transform: translateY(-7px); opacity: 0.9; }
+  }
+
+  .title {
+    font-family: 'Lora', serif;
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--text-main);
+    line-height: 1.35;
+    margin-bottom: 14px;
+  }
+
+  /* Streak badge */
+  .streak-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: var(--badge-bg);
+    border: 1.5px solid var(--badge-border);
+    border-radius: 24px;
+    padding: 7px 16px;
+    margin-bottom: 18px;
+    animation: popIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both 0.35s;
+  }
+  .streak-fire { font-size: 18px; line-height: 1; }
+  .streak-text { font-size: 14px; font-weight: 500; color: var(--text-main); }
+
+  /* Quote */
+  .quote-wrap { max-width: 260px; }
+  .quote-text {
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+  .quote-attr {
+    font-size: 12px;
+    color: var(--text-hint);
+    margin-top: 8px;
+    letter-spacing: 0.04em;
+  }
+
+  /* Mood */
+  .mood-section { margin-bottom: 22px; flex-shrink: 0; }
+  .mood-label {
+    font-size: 13px;
+    color: var(--text-hint);
+    text-align: center;
+    margin-bottom: 12px;
+  }
+  .mood-row { display: flex; justify-content: center; gap: 10px; }
+  .mood-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    padding: 10px 12px;
+    border-radius: 13px;
+    background: var(--mood-bg);
+    border: 1.5px solid transparent;
+    cursor: pointer;
+    transition: all 0.15s;
+    min-width: 60px;
+    user-select: none;
+  }
+  .mood-btn:hover { background: rgba(255,255,255,0.55); }
+  .mood-btn.selected {
+    background: var(--mood-sel-bg);
+    border-color: var(--mood-sel-bd);
+  }
+  .mood-btn:active { transform: scale(0.96); }
+  .mood-face { font-size: 20px; line-height: 1; }
+  .mood-txt  { font-size: 11px; color: rgba(10,60,40,0.55); }
+
+  /* CTAs */
+  .cta-primary {
+    width: 100%;
+    padding: 15px;
+    background: var(--btn-primary);
+    color: white;
+    border-radius: 16px;
+    border: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    margin-bottom: 11px;
+    transition: background 0.2s, transform 0.1s;
+    letter-spacing: 0.02em;
+    flex-shrink: 0;
+  }
+  .cta-primary:hover  { background: var(--btn-primary-hover); }
+  .cta-primary:active { transform: scale(0.98); }
+
+  .cta-secondary {
+    width: 100%;
+    padding: 14px;
+    background: transparent;
+    color: var(--text-main);
+    border-radius: 16px;
+    border: 1.5px solid var(--btn-sec-border);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    letter-spacing: 0.02em;
+    flex-shrink: 0;
+  }
+  .cta-secondary:hover  { background: rgba(255,255,255,0.4); }
+  .cta-secondary:active { transform: scale(0.98); }
+</style>
+</head>
+<body>
+<div class="phone">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+
+  <div class="content">
+    <div class="status-bar">
+      <span class="status-time">9:51</span>
+      <div class="status-icons">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M1 10c1.5-5 10-5 12 0" stroke="rgba(10,60,40,0.4)" stroke-width="1.2" stroke-linecap="round"/>
+          <circle cx="7" cy="12" r="1" fill="rgba(10,60,40,0.4)"/>
+        </svg>
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <rect x="1" y="4" width="9" height="7" rx="1.5" stroke="rgba(10,60,40,0.4)" stroke-width="1.2"/>
+          <path d="M10 6h2a1 1 0 010 2h-2" stroke="rgba(10,60,40,0.4)" stroke-width="1.2"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="celebration">
+      <div class="ring-wrap">
+        <div class="ring-outer"></div>
+        <div class="ring-mid"></div>
+        <div class="ring-core">
+          <div class="ring-icon">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+              <path d="M4 11l5 5L18 6" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </div>
+        <div class="dot d1"></div>
+        <div class="dot d2"></div>
+        <div class="dot d3"></div>
+        <div class="dot d4"></div>
+        <div class="dot d5"></div>
+      </div>
+
+      <div class="title">Bạn đã hoàn thành<br>bài thiền!</div>
+
+      <div class="streak-badge">
+        <span class="streak-fire">🔥</span>
+        <span class="streak-text" id="streakText">7 ngày liên tiếp</span>
+      </div>
+
+      <div class="quote-wrap">
+        <div class="quote-text" id="quoteText"></div>
+        <div class="quote-attr" id="quoteAttr"></div>
+      </div>
+    </div>
+
+    <div class="mood-section">
+      <div class="mood-label">Bạn cảm thấy thế nào?</div>
+      <div class="mood-row">
+        <div class="mood-btn" onclick="selectMood(this)">
+          <span class="mood-face">😌</span>
+          <span class="mood-txt">Bình yên</span>
+        </div>
+        <div class="mood-btn selected" onclick="selectMood(this)">
+          <span class="mood-face">✨</span>
+          <span class="mood-txt">Sảng khoái</span>
+        </div>
+        <div class="mood-btn" onclick="selectMood(this)">
+          <span class="mood-face">😴</span>
+          <span class="mood-txt">Thư giãn</span>
+        </div>
+        <div class="mood-btn" onclick="selectMood(this)">
+          <span class="mood-face">🙂</span>
+          <span class="mood-txt">Vui hơn</span>
+        </div>
+      </div>
+    </div>
+
+    <button class="cta-primary" onclick="handleNext()">Khám phá bài tiếp theo</button>
+    <button class="cta-secondary" onclick="handleHome()">Quay lại trang chủ</button>
+  </div>
+</div>
+
+<script>
+  const quotes = [
+    { text: '"Mỗi hơi thở là một khởi đầu mới."',            attr: '— Thích Nhất Hạnh' },
+    { text: '"Bình yên đến từ bên trong, đừng tìm kiếm nó bên ngoài."', attr: '— Phật Thích Ca' },
+    { text: '"Hãy để tâm trí nghỉ ngơi, cơ thể sẽ tự chữa lành."', attr: '— Lão Tử' },
+    { text: '"Khoảnh khắc hiện tại luôn là nơi bạn cần ở."', attr: '— Eckhart Tolle' },
+    { text: '"Thiền không phải là thoát khỏi cuộc sống — mà là học cách sống trọn vẹn."', attr: '— Jon Kabat-Zinn' },
+  ];
+
+  const q = quotes[Math.floor(Math.random() * quotes.length)];
+  document.getElementById('quoteText').textContent = q.text;
+  document.getElementById('quoteAttr').textContent  = q.attr;
+
+  function selectMood(el) {
+    document.querySelectorAll('.mood-btn').forEach(b => b.classList.remove('selected'));
+    el.classList.add('selected');
+  }
+
+  function handleNext() {
+    alert('→ Điều hướng đến màn Browser / danh sách bài thiền');
+  }
+  function handleHome() {
+    alert('→ Điều hướng về trang chủ');
+  }
+</script>
+</body>
+</html>

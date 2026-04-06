@@ -238,4 +238,28 @@ class SVi extends S {
 
   @override
   String get streak_mood => 'CẢM XÚC';
+
+  @override
+  String get meditationComplete_title => 'Bạn đã hoàn thành\nbài thiền!';
+
+  @override
+  String get meditationComplete_moodLabel => 'Bạn cảm thấy thế nào?';
+
+  @override
+  String get meditationComplete_moodPeaceful => 'Bình yên';
+
+  @override
+  String get meditationComplete_moodRefreshed => 'Sảng khoái';
+
+  @override
+  String get meditationComplete_moodRelaxed => 'Thư giãn';
+
+  @override
+  String get meditationComplete_moodHappier => 'Vui hơn';
+
+  @override
+  String get meditationComplete_nextCta => 'Khám phá bài tiếp theo';
+
+  @override
+  String get meditationComplete_homeCta => 'Quay lại trang chủ';
 }

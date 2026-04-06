@@ -534,6 +534,54 @@ abstract class S {
   /// In en, this message translates to:
   /// **'MOOD'**
   String get streak_mood;
+
+  /// Meditation complete screen title
+  ///
+  /// In en, this message translates to:
+  /// **'You\'ve completed\nthe meditation!'**
+  String get meditationComplete_title;
+
+  /// Mood selector label
+  ///
+  /// In en, this message translates to:
+  /// **'How are you feeling?'**
+  String get meditationComplete_moodLabel;
+
+  /// Peaceful mood option
+  ///
+  /// In en, this message translates to:
+  /// **'Peaceful'**
+  String get meditationComplete_moodPeaceful;
+
+  /// Refreshed mood option
+  ///
+  /// In en, this message translates to:
+  /// **'Refreshed'**
+  String get meditationComplete_moodRefreshed;
+
+  /// Relaxed mood option
+  ///
+  /// In en, this message translates to:
+  /// **'Relaxed'**
+  String get meditationComplete_moodRelaxed;
+
+  /// Happier mood option
+  ///
+  /// In en, this message translates to:
+  /// **'Happier'**
+  String get meditationComplete_moodHappier;
+
+  /// Primary CTA button
+  ///
+  /// In en, this message translates to:
+  /// **'Explore the next session'**
+  String get meditationComplete_nextCta;
+
+  /// Secondary CTA button
+  ///
+  /// In en, this message translates to:
+  /// **'Back to home'**
+  String get meditationComplete_homeCta;
 }
 
 class _SDelegate extends LocalizationsDelegate<S> {

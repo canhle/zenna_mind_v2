@@ -94,5 +94,15 @@
   "streak_goHome": "Quay lại trang chủ",
   "streak_duration": "THỜI GIAN",
   "streak_breathCycles": "VÒNG THỞ",
-  "streak_mood": "CẢM XÚC"
+  "streak_mood": "CẢM XÚC",
+
+  "@@_MEDITATION_COMPLETE": "==================================================",
+  "meditationComplete_title": "Bạn đã hoàn thành\nbài thiền!",
+  "meditationComplete_moodLabel": "Bạn cảm thấy thế nào?",
+  "meditationComplete_moodPeaceful": "Bình yên",
+  "meditationComplete_moodRefreshed": "Sảng khoái",
+  "meditationComplete_moodRelaxed": "Thư giãn",
+  "meditationComplete_moodHappier": "Vui hơn",
+  "meditationComplete_nextCta": "Khám phá bài tiếp theo",
+  "meditationComplete_homeCta": "Quay lại trang chủ"
 }

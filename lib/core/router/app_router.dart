@@ -8,6 +8,8 @@ import 'package:flutter_clean_template/features/favorites/favorites_screen.dart'
 import 'package:flutter_clean_template/features/home/home_screen.dart';
 import 'package:flutter_clean_template/features/settings/settings_screen.dart';
 import 'package:flutter_clean_template/features/player/player_screen.dart';
+import 'package:flutter_clean_template/features/meditation_complete/meditation_complete_screen.dart';
+import 'package:flutter_clean_template/features/meditation_complete/models/meditation_complete_arguments.dart';
 import 'package:flutter_clean_template/features/streak/streak_screen.dart';
 import 'package:flutter_clean_template/features/welcome/welcome_screen.dart';
 
@@ -21,6 +23,7 @@ abstract class AppRoutes {
   static const String settings = '/settings';
   static const String player = '/player';
   static const String streak = '/streak';
+  static const String meditationComplete = '/meditation-complete';
 }
 
 @riverpod
@@ -40,6 +43,14 @@ GoRouter appRouter(Ref ref) {
       GoRoute(
         path: AppRoutes.streak,
         builder: (_, __) => const StreakScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.meditationComplete,
+        builder: (_, state) {
+          final args = state.extra as MeditationCompleteArguments? ??
+              const MeditationCompleteArguments();
+          return MeditationCompleteScreen(args: args);
+        },
       ),
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) => AppScaffold(

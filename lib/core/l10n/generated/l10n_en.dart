@@ -237,4 +237,28 @@ class SEn extends S {
 
   @override
   String get streak_mood => 'MOOD';
+
+  @override
+  String get meditationComplete_title => 'You\'ve completed\nthe meditation!';
+
+  @override
+  String get meditationComplete_moodLabel => 'How are you feeling?';
+
+  @override
+  String get meditationComplete_moodPeaceful => 'Peaceful';
+
+  @override
+  String get meditationComplete_moodRefreshed => 'Refreshed';
+
+  @override
+  String get meditationComplete_moodRelaxed => 'Relaxed';
+
+  @override
+  String get meditationComplete_moodHappier => 'Happier';
+
+  @override
+  String get meditationComplete_nextCta => 'Explore the next session';
+
+  @override
+  String get meditationComplete_homeCta => 'Back to home';
 }

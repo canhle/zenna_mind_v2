@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_clean_template/core/router/app_router.dart';
 import 'package:flutter_clean_template/design_system/tokens/ds_spacing.dart';
+import 'package:flutter_clean_template/features/meditation_complete/models/meditation_complete_arguments.dart';
 import 'package:flutter_clean_template/features/player/components/player_background.dart';
 import 'package:flutter_clean_template/features/player/components/player_breathing_ring.dart';
 import 'package:flutter_clean_template/features/player/components/player_controls.dart';
@@ -29,6 +31,11 @@ class _PlayerScreenState extends ConsumerState<PlayerScreen> {
       switch (event) {
         case PlayerNavigateBack():
           context.pop();
+        case PlayerSessionComplete():
+          context.go(
+            AppRoutes.meditationComplete,
+            extra: const MeditationCompleteArguments(streakCount: 7),
+          );
       }
 
       ref.read(playerViewModelProvider.notifier).consumeEvent();

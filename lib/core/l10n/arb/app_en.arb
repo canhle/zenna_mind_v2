@@ -167,5 +167,23 @@
   "streak_breathCycles": "BREATH CYCLES",
   "@streak_breathCycles": { "description": "Streak stat breath cycles label" },
   "streak_mood": "MOOD",
-  "@streak_mood": { "description": "Streak stat mood label" }
+  "@streak_mood": { "description": "Streak stat mood label" },
+
+  "@@_MEDITATION_COMPLETE": "==================================================",
+  "meditationComplete_title": "You've completed\nthe meditation!",
+  "@meditationComplete_title": { "description": "Meditation complete screen title" },
+  "meditationComplete_moodLabel": "How are you feeling?",
+  "@meditationComplete_moodLabel": { "description": "Mood selector label" },
+  "meditationComplete_moodPeaceful": "Peaceful",
+  "@meditationComplete_moodPeaceful": { "description": "Peaceful mood option" },
+  "meditationComplete_moodRefreshed": "Refreshed",
+  "@meditationComplete_moodRefreshed": { "description": "Refreshed mood option" },
+  "meditationComplete_moodRelaxed": "Relaxed",
+  "@meditationComplete_moodRelaxed": { "description": "Relaxed mood option" },
+  "meditationComplete_moodHappier": "Happier",
+  "@meditationComplete_moodHappier": { "description": "Happier mood option" },
+  "meditationComplete_nextCta": "Explore the next session",
+  "@meditationComplete_nextCta": { "description": "Primary CTA button" },
+  "meditationComplete_homeCta": "Back to home",
+  "@meditationComplete_homeCta": { "description": "Secondary CTA button" }
 }

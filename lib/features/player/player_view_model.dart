@@ -19,7 +19,7 @@ class PlayerViewModel extends _$PlayerViewModel {
   }
 
   void onSkipNext() {
-    // TODO: Navigate to next track
+    state = state.copyWith(event: const PlayerSessionComplete());
   }
 
   void onSeek(double fraction) {

@@ -12,6 +12,10 @@ class PlayerNavigateBack extends PlayerEvent {
   const PlayerNavigateBack();
 }
 
+class PlayerSessionComplete extends PlayerEvent {
+  const PlayerSessionComplete();
+}
+
 // ── UiState ──────────────────────────────────────────────────────────────
 
 @freezed

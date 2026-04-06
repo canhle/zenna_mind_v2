@@ -57,4 +57,8 @@ abstract class DsColors {
   // App-specific
   static const Color primaryDim = Color(0xFF0F766E);
   static const Color primaryLight = Color(0xFF62D0BD);
+
+  // Completion screen
+  static const Color completionText = Color(0xFF0A3D28);
+  static const Color completionAccent = Color(0xFF0D6E4A);
 }
