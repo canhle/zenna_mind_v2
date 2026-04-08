@@ -1,22 +1,28 @@
 {
   "project_info": {
-    "project_number": "TODO_REPLACE",
-    "project_id": "TODO_REPLACE",
-    "storage_bucket": "TODO_REPLACE"
+    "project_number": "876452356443",
+    "project_id": "zenna-mind",
+    "storage_bucket": "zenna-mind.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "TODO_REPLACE",
+        "mobilesdk_app_id": "1:876452356443:android:5f3686b7868e65df25ba7e",
         "android_client_info": {
-          "package_name": "com.example.flutter_clean_template"
+          "package_name": "com.zennamind.app"
         }
       },
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "TODO_REPLACE"
+          "current_key": "AIzaSyBOfeS4a7OrutPiwV2E5DPGQ7FoRDUTCdY"
         }
-      ]
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
     }
   ],
   "configuration_version": "1"

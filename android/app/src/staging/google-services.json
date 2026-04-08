@@ -1,22 +1,47 @@
 {
   "project_info": {
-    "project_number": "TODO_REPLACE",
-    "project_id": "TODO_REPLACE",
-    "storage_bucket": "TODO_REPLACE"
+    "project_number": "1035947359003",
+    "project_id": "zenna-mind-dev",
+    "storage_bucket": "zenna-mind-dev.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "TODO_REPLACE",
+        "mobilesdk_app_id": "1:1035947359003:android:c9d79955bc9756a74e31be",
         "android_client_info": {
-          "package_name": "com.example.flutter_clean_template.staging"
+          "package_name": "com.zennamind.app.dev"
         }
       },
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "TODO_REPLACE"
+          "current_key": "AIzaSyBwB-dzZKcaXVwxzWSPTxSf3ydy1IrUQ3U"
         }
-      ]
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1035947359003:android:bba15f818e2e22374e31be",
+        "android_client_info": {
+          "package_name": "com.zennamind.app.staging"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBwB-dzZKcaXVwxzWSPTxSf3ydy1IrUQ3U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
     }
   ],
   "configuration_version": "1"

@@ -1,4 +1,4 @@
-package com.example.flutter_clean_template
+package com.zennamind.app
 
 import io.flutter.embedding.android.FlutterActivity
 
