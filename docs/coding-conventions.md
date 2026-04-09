@@ -339,10 +339,12 @@ Repository (abstract interface)
   ↓
 Data Provider (@riverpod — wires RepositoryImpl)
   ↓
-RepositoryImpl + RemoteDataSource
+RepositoryImpl + FirestoreDataSource
   ↓
-Dio (HTTP)
+Cloud Firestore (cloud_firestore)
 ```
+
+> Dio remains available in `core/network/` as a reserved transport for future REST features, but no current feature uses it. New DataSources default to Firestore.
 
 **Dependency rule**: upper layers depend on lower layers. The reverse is never allowed.
 **Import rule**: ViewModel imports only from `domain/providers/`. It must never import from `data/`.
@@ -399,7 +401,9 @@ lib/
 │   │   └── generated/                      # Auto-generated — do not edit
 │   ├── mixins/
 │   │   └── listen_with_auto_close.dart
-│   ├── network/
+│   ├── firebase/
+│   │   └── firestore_provider.dart         # FirebaseFirestore instance (@riverpod)
+│   ├── network/                            # Reserved for future REST use — unused today
 │   │   ├── dio_client.dart
 │   │   ├── endpoints.dart
 │   │   ├── error_interceptor.dart
@@ -430,9 +434,9 @@ lib/
 │
 ├── data/                                   # Infrastructure — layer-first
 │   ├── models/
-│   │   └── product_model.dart
+│   │   └── product_model.dart               # Firestore doc model (fromFirestore/toFirestore)
 │   ├── datasources/
-│   │   └── product_remote_datasource.dart
+│   │   └── product_firestore_datasource.dart
 │   ├── repositories/
 │   │   └── product_repository_impl.dart
 │   └── providers/                          # DataSource + Repository providers
@@ -460,7 +464,7 @@ Extensions must be placed based on the **type they extend**, not grouped arbitra
 |---|---|---|
 | Dart/Flutter SDK types (`BuildContext`, `String`, `DateTime`, `List`, `num`) | `core/extensions/` | `context_extensions.dart` |
 | Domain entity (`Product`, `Order`) | Next to the entity file in `domain/entities/` | `product_extensions.dart` |
-| 3rd-party lib type (`Dio`, `Response`) | Next to the wrapper file | `core/network/dio_extensions.dart` |
+| 3rd-party lib type (`DocumentSnapshot`, `Query`, `Dio`) | Next to the wrapper file | `core/firebase/query_extensions.dart` |
 | Feature-specific (used by one screen only) | Inside the feature folder | `features/cart/extensions/` |
 
 **Rules:**
@@ -507,13 +511,13 @@ extension ProductExtensions on Product {
 // Owns: DataSource and Repository providers only
 
 @riverpod
-ProductRemoteDataSource productRemoteDataSource(Ref ref) {
-  return ProductRemoteDataSourceImpl(ref.read(dioClientProvider));
+ProductFirestoreDataSource productFirestoreDataSource(Ref ref) {
+  return ProductFirestoreDataSourceImpl(ref.read(firestoreProvider));
 }
 
 @riverpod
 ProductRepository productRepository(Ref ref) {
-  return ProductRepositoryImpl(ref.read(productRemoteDataSourceProvider));
+  return ProductRepositoryImpl(ref.read(productFirestoreDataSourceProvider));
 }
 ```
 
@@ -623,19 +627,21 @@ class GetProductsUseCase {
 
 ### 3.7 Error Handling Strategy
 
-Each layer translates errors into its own language. No layer leaks the error type of the layer below it.
+Each layer translates errors into its own language. No layer leaks the error type of the layer below it. `Failure` is the single error language used from DataSource upwards.
 
 ```
-DataSource   → Dio throws DioException
-                  ↓ ErrorInterceptor translates
-Repository   → Failure propagates up
-                  ↓ bubble up (no try/catch needed)
-Provider     → AsyncError wraps Failure
-                  ↓
-ViewModel    → switch on Failure type → update UiState + Event
-                  ↓
-UI           → render ErrorView / show SnackBar / navigate
+DataSource (Firestore) → FirebaseException thrown by cloud_firestore
+                           ↓ DataSource try/catch maps to Failure
+Repository             → Failure propagates up
+                           ↓ bubble up (no try/catch needed)
+Provider               → AsyncError wraps Failure
+                           ↓
+ViewModel              → switch on Failure type → update UiState + Event
+                           ↓
+UI                     → render ErrorView / show SnackBar / navigate
 ```
+
+> If a REST DataSource is added later using Dio, it would instead rely on `ErrorInterceptor` to translate `DioException` → `Failure` before it reaches the DataSource caller. Both paths converge on `Failure`.
 
 #### Failure types
 
@@ -685,9 +691,45 @@ class ServerFailure extends Failure {
 }
 ```
 
-#### ErrorInterceptor — single translation point
+#### Firestore error translation — single helper
 
-All `DioException` → `Failure` translation happens in `ErrorInterceptor`. It handles both `DioExceptionType` (timeout, cancel, no connection) and HTTP status codes. DataSource and Repository do not need `try/catch`.
+Each FirestoreDataSource wraps queries in a single `try/catch` and delegates to a shared helper that maps `FirebaseException.code` → `Failure`. No business logic in the catch block. Repository does NOT need `try/catch` — Failure propagates naturally.
+
+```dart
+// core/firebase/firestore_error_mapper.dart
+Failure mapFirestoreError(FirebaseException e) => switch (e.code) {
+      'unavailable' || 'cancelled' => const NetworkFailure(),
+      'deadline-exceeded' => const TimeoutFailure(),
+      'permission-denied' => const ForbiddenFailure(),
+      'unauthenticated' => const UnauthorizedFailure(),
+      'not-found' => const NotFoundFailure(),
+      'resource-exhausted' => const ServerFailure(message: 'Quota exceeded'),
+      _ => ServerFailure(errorCode: e.code, message: e.message ?? 'Server error'),
+    };
+
+// data/datasources/product_firestore_datasource.dart
+class ProductFirestoreDataSourceImpl implements ProductFirestoreDataSource {
+  const ProductFirestoreDataSourceImpl(this._firestore);
+  final FirebaseFirestore _firestore;
+
+  @override
+  Future<List<ProductModel>> getProducts({required String categoryId}) async {
+    try {
+      final snapshot = await _firestore
+          .collection('products')
+          .where('categoryId', isEqualTo: categoryId)
+          .get();
+      return snapshot.docs.map(ProductModel.fromFirestore).toList();
+    } on FirebaseException catch (e) {
+      throw mapFirestoreError(e);
+    }
+  }
+}
+```
+
+#### ErrorInterceptor — for future REST use only
+
+`ErrorInterceptor` still lives in `core/network/` as a complete `DioException` → `Failure` translator. It is kept ready for when/if a REST endpoint is added. It is currently NOT used by any feature.
 
 ```dart
 // core/network/error_interceptor.dart
@@ -773,85 +815,96 @@ void _handleError(Object error) {
 }
 ```
 
-### 3.8 Network Layer
+### 3.8 Data Backend Layer
 
-Use **Dio with interceptors** as the HTTP foundation. Retrofit is optional and may be added when the number of endpoints justifies the code generation overhead (roughly 20+).
+Use **Cloud Firestore via `cloud_firestore`** as the primary data backend. The schema is defined in `docs/db/zenna_mind_database_design.pdf`. Dio is reserved in `core/network/` for potential future REST features.
 
 ```dart
-// core/network/dio_client.dart
+// core/firebase/firestore_provider.dart
 @riverpod
-Dio dioClient(Ref ref) {
-  final dio = Dio(
-    BaseOptions(
-      baseUrl: Env.baseUrl,
-      connectTimeout: const Duration(seconds: 10),
-      receiveTimeout: const Duration(seconds: 10),
-      headers: {'Content-Type': 'application/json'},
-    ),
-  );
-
-  dio.interceptors.addAll([
-    AuthInterceptor(ref),
-    ErrorInterceptor(),
-    LoggingInterceptor(),
-  ]);
-
-  return dio;
-}
-
-// core/network/endpoints.dart
-abstract class Endpoints {
-  static const String products = '/products';
-  static const String cart    = '/cart/items';
-
-  static String productDetail(String id) => '/products/$id';
-}
+FirebaseFirestore firestore(Ref ref) => FirebaseFirestore.instance;
 ```
 
-DataSources stay simple — no try/catch, no error translation:
+**Read modes — choose deliberately per query:**
+
+| Mode | When to use |
+|---|---|
+| `collection(...).get()` | One-shot fetch for static or cacheable data (e.g., category list, session catalog) |
+| `doc(...).snapshots()` or `collection(...).snapshots()` | Realtime updates visible to the user (e.g., streak counter, live progress) |
+
+**DataSource rules:**
+
+- Stateless — no caching, no retry, no business logic
+- Each public method wraps its query in a single `try/catch` on `FirebaseException`
+- The catch block only calls the shared `mapFirestoreError` helper
+- Use collection references with generic converters (`.withConverter`) or rely on `Model.fromFirestore(snapshot)` helpers on the model class
+- Scope user-specific queries by `currentUser.uid` — never trust client-side filters alone. Firestore Security Rules are the enforcement layer.
 
 ```dart
-// data/datasources/product_remote_datasource.dart
-class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
-  const ProductRemoteDataSourceImpl(this._dio);
-  final Dio _dio;
+// data/datasources/product_firestore_datasource.dart
+abstract interface class ProductFirestoreDataSource {
+  Future<List<ProductModel>> getProducts({required String categoryId});
+  Stream<ProductModel?> watchProduct(String id);
+}
+
+class ProductFirestoreDataSourceImpl implements ProductFirestoreDataSource {
+  const ProductFirestoreDataSourceImpl(this._firestore);
+  final FirebaseFirestore _firestore;
 
   @override
-  Future<List<ProductModel>> getProducts({
-    required String categoryId,
-    required int page,
-  }) async {
-    final response = await _dio.get(
-      Endpoints.products,
-      queryParameters: {'category_id': categoryId, 'page': page},
-    );
-    return (response.data['items'] as List)
-        .map((e) => ProductModel.fromJson(e as Map<String, dynamic>))
-        .toList();
+  Future<List<ProductModel>> getProducts({required String categoryId}) async {
+    try {
+      // Firestore path per docs/db/zenna_mind_database_design.pdf
+      final snapshot = await _firestore
+          .collection('products')
+          .where('categoryId', isEqualTo: categoryId)
+          .get();
+      return snapshot.docs.map(ProductModel.fromFirestore).toList();
+    } on FirebaseException catch (e) {
+      throw mapFirestoreError(e);
+    }
+  }
+
+  @override
+  Stream<ProductModel?> watchProduct(String id) {
+    return _firestore
+        .collection('products')
+        .doc(id)
+        .snapshots()
+        .map((snap) => snap.exists ? ProductModel.fromFirestore(snap) : null);
   }
 }
 ```
 
+> Dio is kept in `core/network/` with full `ErrorInterceptor`/`AuthInterceptor` setup. It is NOT currently wired to any feature. When a REST endpoint is eventually needed, create a `*_remote_datasource.dart` using Dio alongside the Firestore datasources.
+
 ### 3.9 Stateless DataSources
 
-DataSources must be **stateless**. They only wrap API endpoints and expose `Future` / `Stream` return types. They hold no cached data and perform no business logic — that is the Repository's responsibility.
+DataSources must be **stateless**. They only wrap Firestore queries and expose `Future` / `Stream` return types. They hold no cached data and perform no business logic — that is the Repository's responsibility.
 
 ```dart
-// ✓ Correct — stateless, only wraps API
-class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
-  const ProductRemoteDataSourceImpl(this._dio);
-  final Dio _dio;
+// ✓ Correct — stateless, only wraps Firestore query
+class ProductFirestoreDataSourceImpl implements ProductFirestoreDataSource {
+  const ProductFirestoreDataSourceImpl(this._firestore);
+  final FirebaseFirestore _firestore;
 
   @override
-  Future<List<ProductModel>> getProducts({...}) async {
-    final response = await _dio.get(Endpoints.products, ...);
-    return /* parse */;
+  Future<List<ProductModel>> getProducts({required String categoryId}) async {
+    try {
+      final snapshot = await _firestore
+          .collection('products')
+          .where('categoryId', isEqualTo: categoryId)
+          .get();
+      return snapshot.docs.map(ProductModel.fromFirestore).toList();
+    } on FirebaseException catch (e) {
+      throw mapFirestoreError(e);
+    }
   }
   // No caching, no retry logic, no state
 }
 
 // ✗ Avoid — DataSource holding state
-class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
+class ProductFirestoreDataSourceImpl implements ProductFirestoreDataSource {
   List<ProductModel>? _cache; // state belongs in Repository
 
   Future<List<ProductModel>> getProducts({...}) async {
@@ -863,12 +916,12 @@ class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
 
 ### 3.10 Service Access Rules
 
-Services in `core/services/` (e.g. `StorageService`) are infrastructure — similar to `Dio`. Access rules depend on **who** is calling:
+Services in `core/services/` (e.g. `StorageService`) are infrastructure — similar to `FirebaseFirestore`. Access rules depend on **who** is calling:
 
 | Caller | Access | Example |
 |--------|--------|---------|
 | **ViewModel / Feature** | Through Repository — never directly | ViewModel → UseCase → SettingsRepository → StorageService |
-| **Core infrastructure** (interceptor, dio) | Directly — no Repository needed | `AuthInterceptor` reads token from `StorageService` |
+| **Core infrastructure** (interceptors, Firestore setup) | Directly — no Repository needed | `AuthInterceptor` reads token from `StorageService` |
 
 **Why?** ViewModel must not depend on infrastructure details. If storage backend changes (e.g. SharedPreferences → Hive), only RepositoryImpl changes — ViewModel and UseCase are untouched.
 

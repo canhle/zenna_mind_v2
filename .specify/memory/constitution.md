@@ -1,7 +1,13 @@
 <!--
 Sync Impact Report
 ===================
-Version change: N/A -> 1.0.0 (initial creation)
+Version change: 1.0.0 -> 1.1.0 (Firestore-first data backend)
+
+Modified principles:
+  - IV. Sealed Error Handling — updated for FirebaseException translation in DataSource
+
+Modified sections:
+  - Technical Standards — replaced Dio/REST with Cloud Firestore as primary data backend
 
 Added principles:
   - I. Clean Architecture (layer separation)
@@ -32,8 +38,8 @@ Follow-up TODOs: none
 
 Every feature MUST follow a three-layer separation with strict dependency rules:
 
-- **domain/** (layer-first): Pure Dart only. Contains entities (`@freezed`), repository interfaces (`abstract interface class`), and UseCases. MUST NOT import Flutter, Dio, or any infrastructure package.
-- **data/** (layer-first): Implements domain contracts. Contains Models (`@JsonSerializable`), DataSources (stateless HTTP via Dio), and RepositoryImpl. MUST NOT import UI code.
+- **domain/** (layer-first): Pure Dart only. Contains entities (`@freezed`), repository interfaces (`abstract interface class`), and UseCases. MUST NOT import Flutter, `cloud_firestore`, or any infrastructure package.
+- **data/** (layer-first): Implements domain contracts. Contains Models (`@JsonSerializable` with `fromFirestore`/`toFirestore` helpers), DataSources (stateless Firestore queries via `cloud_firestore`), and RepositoryImpl. MUST NOT import UI code.
 - **features/** (feature-first): Presentation layer. Each feature folder owns its Screen (`ConsumerStatefulWidget`), ViewModel (`Notifier<UiState>`), UiState (`@freezed`), and components.
 
 Dependency rule: `features/ -> domain/` and `features/ -> core/`, `data/ -> domain/`. Data MUST NOT depend on features. Domain MUST NOT depend on data or features.
@@ -61,10 +67,10 @@ All UiState classes and domain entities MUST use `@freezed`.
 
 The app MUST use a single `sealed class Failure` hierarchy as the error language across all layers.
 
-- `ErrorInterceptor` translates `DioException` to the appropriate `Failure` subtype at the infrastructure boundary.
-- DataSources MUST NOT contain `try/catch` — error translation is handled by the interceptor.
+- Cloud Firestore is the primary data backend. `FirebaseException` MUST be translated to the appropriate `Failure` subtype inside the FirestoreDataSource (the Firestore SDK has no interceptor mechanism — translation lives at the call site, wrapped in a single helper).
+- DataSources contain a single `try/catch` boundary that maps `FirebaseException` codes (`unavailable`, `permission-denied`, `not-found`, `unauthenticated`, etc.) to `Failure` subtypes. No business logic in the catch block.
 - ViewModels translate `Failure` subtypes to localized user-facing messages via `switch` pattern matching.
-- If a second data source is added (Firebase, local DB), a separate exception layer MAY be introduced at that point — not before.
+- If a second data source is added later (REST API, local DB), it MUST translate its own exceptions to the same `Failure` hierarchy at its own boundary.
 
 ### V. Design System Separation
 
@@ -79,10 +85,12 @@ The `design_system/` layer MUST remain independent from business logic and app c
 
 - **Language**: Flutter 3.x / Dart 3.x
 - **Target platforms**: iOS and Android
-- **HTTP client**: Dio with centralized endpoint constants in `core/network/endpoints.dart`
+- **Data backend**: Cloud Firestore via the `cloud_firestore` package. The Firestore schema is defined in `docs/db/zenna_mind_database_design.pdf` — that document is the authoritative source for all collection paths, document shapes, and relationships. There is NO REST API layer.
+- **Read modes**: Use one-shot `get()` for static/cacheable data and `snapshots()` streams for data that must update in realtime (e.g., live progress, presence). Choose deliberately per query, not by default.
+- **Authentication**: Firebase Authentication. The `currentUser.uid` MUST be passed into queries that read user-scoped data — never trust client-side filters alone (rely on Firestore Security Rules as the enforcement layer).
 - **Navigation**: GoRouter with `AppRoutes` constants
 - **Localization**: Flutter `gen-l10n` with ARB files. Keys MUST be grouped by feature prefix (`common_`, `error_`, `productList_`, `auth_`).
-- **Storage**: SharedPreferences for preferences, FlutterSecureStorage for tokens
+- **Storage**: SharedPreferences for preferences, FlutterSecureStorage for tokens/secrets
 - **Code generation**: `build_runner` with `freezed_generator`, `riverpod_generator`, `json_serializable`. MUST run codegen after creating any `@freezed`, `@riverpod`, or `@JsonSerializable` file.
 - **Flavors**: Three environments — `dev`, `staging`, `production` — each with its own entry point (`main_dev.dart`, `main_staging.dart`, `main_production.dart`) and env config.
 - **Linting**: `package:flutter_lints/flutter.yaml` as base. All code MUST pass `flutter analyze` with zero warnings.
@@ -103,4 +111,4 @@ The `design_system/` layer MUST remain independent from business logic and app c
 - Versioning follows semantic versioning: MAJOR for principle removals/redefinitions, MINOR for new principles or expanded guidance, PATCH for clarifications.
 - Runtime development guidance lives in `CLAUDE.md` and `docs/architecture-guide.md`.
 
-**Version**: 1.0.0 | **Ratified**: 2026-03-30 | **Last Amended**: 2026-03-30
+**Version**: 1.1.0 | **Ratified**: 2026-03-30 | **Last Amended**: 2026-04-09

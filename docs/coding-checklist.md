@@ -94,7 +94,7 @@ This checklist is derived from `coding-conventions.md`. Use it to review code be
 
 ## 5.1 Layer Structure
 
-- [ ] Follows: UI → ViewModel → Provider → UseCase → Repository → DataSource → Dio
+- [ ] Follows: UI → ViewModel → Provider → UseCase → Repository → DataSource → Cloud Firestore
 - [ ] No layer skipping — upper layers depend on lower layers only
 - [ ] ViewModel imports ONLY from `domain/providers/` — never from `data/`
 
@@ -124,8 +124,8 @@ This checklist is derived from `coding-conventions.md`. Use it to review code be
 
 # 6. Entity vs Model
 
-- [ ] Entity in `domain/entities/` — pure Dart, no framework dependencies
-- [ ] Model in `data/models/` — uses `json_serializable`, mirrors JSON structure
+- [ ] Entity in `domain/entities/` — pure Dart, no framework dependencies (no `cloud_firestore`, no Dio)
+- [ ] Model in `data/models/` — mirrors Firestore document shape via `fromFirestore(DocumentSnapshot)` + `toFirestore()`; may use `@JsonSerializable` for map conversion
 - [ ] Model provides `toEntity()` method for conversion
 - [ ] Entity used by ViewModel, UiState, UseCase
 - [ ] Model used ONLY by DataSource, RepositoryImpl
@@ -145,8 +145,9 @@ This checklist is derived from `coding-conventions.md`. Use it to review code be
 ## 8.1 Error Flow
 
 - [ ] Uses `sealed class Failure` as base error type
-- [ ] All `DioException` → `Failure` translation happens in `ErrorInterceptor` only
-- [ ] DataSource and Repository do NOT need `try/catch`
+- [ ] FirestoreDataSource wraps queries in a single `try/catch` and delegates to the shared `mapFirestoreError(FirebaseException)` helper
+- [ ] Repository does NOT use `try/catch` — `Failure` bubbles up naturally
+- [ ] (If Dio-based REST is added) `DioException` → `Failure` translation stays in `ErrorInterceptor`; those DataSources need NO try/catch
 - [ ] ViewModel uses `switch` on Failure type to update UiState + Event
 
 ## 8.2 Error State Strategy
@@ -157,19 +158,23 @@ This checklist is derived from `coding-conventions.md`. Use it to review code be
 
 ---
 
-# 9. Network Layer
+# 9. Data Backend Layer
 
-- [ ] Uses Dio with interceptors as HTTP foundation
-- [ ] Endpoints centralized in `core/network/endpoints.dart`
+- [ ] Primary backend is Cloud Firestore via `cloud_firestore` — NOT REST/Dio
+- [ ] DataSource class name: `*_firestore_datasource.dart`
+- [ ] Every Firestore path cited in code matches `docs/db/zenna_mind_database_design.pdf`
 - [ ] DataSources are stateless — no caching, no retry logic, no state
-- [ ] DataSources do NOT use `try/catch` — errors handled by ErrorInterceptor
+- [ ] FirestoreDataSources have exactly ONE `try/catch` per public method, delegating to `mapFirestoreError`
+- [ ] Read mode chosen deliberately: `get()` for static data, `snapshots()` for realtime
+- [ ] User-scoped queries pass `currentUser.uid` — never trust client filters alone (Firestore Security Rules are the enforcement layer)
+- [ ] Dio is reserved for future REST use — do NOT invoke Dio or `Endpoints` from any current feature
 
 ---
 
 # 10. Service Access
 
 - [ ] ViewModel/Feature accesses services through Repository — never directly
-- [ ] Core infrastructure (interceptor, dio) may access services directly
+- [ ] Core infrastructure (interceptors, Firestore setup) may access services directly
 - [ ] If storage backend changes, only RepositoryImpl changes — ViewModel/UseCase untouched
 
 ---
