@@ -47,6 +47,8 @@ dependencies:
   flutter_svg: ^2.2.3
   google_fonts: ^6.2.1
   firebase_core: ^4.6.0
+  firebase_auth: ^6.3.0
+  cloud_firestore: ^6.2.0
 
 dev_dependencies:
   flutter_test:
@@ -58,6 +60,9 @@ dev_dependencies:
   freezed: ^2.5.2
   json_serializable: ^6.8.0
   flutter_gen_runner: ^5.13.0+1
+  mocktail: ^1.0.4
+  fake_cloud_firestore: ^4.1.0+1
+  firebase_auth_mocks: ^0.15.1
 
 flutter_gen:
   output: lib/design_system/generated/

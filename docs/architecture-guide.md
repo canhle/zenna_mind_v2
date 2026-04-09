@@ -2,7 +2,7 @@
 
 Flutter Clean Architecture template using Riverpod, Freezed, and Cloud Firestore as the primary data backend.
 
-> **Data backend**: This project reads/writes data directly from Cloud Firestore. The schema is defined in `docs/db/zenna_mind_database_design.pdf` — that document is the authoritative source for all collection paths and document shapes. `dio` is kept in the codebase for potential future REST endpoints, but no current feature uses it.
+> **Data backend**: This project reads/writes data directly from Cloud Firestore. The schema is defined in `docs/db/zenna_mind_database_design.md` — that document is the authoritative source for all collection paths and document shapes. `dio` is kept in the codebase for potential future REST endpoints, but no current feature uses it.
 
 ---
 
@@ -415,7 +415,7 @@ class OrderFirestoreDataSourceImpl implements OrderFirestoreDataSource {
     required int limit,
   }) async {
     try {
-      // Firestore path per docs/db/zenna_mind_database_design.pdf
+      // Firestore path per docs/db/zenna_mind_database_design.md
       final snapshot = await _firestore
           .collection('users')
           .doc(userId)

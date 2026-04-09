@@ -107,6 +107,18 @@ class SVi extends S {
   String get welcome_terms => 'Điều khoản sử dụng';
 
   @override
+  String get welcome_errorNoNetwork => 'Kiểm tra kết nối mạng và thử lại';
+
+  @override
+  String get welcome_errorAuth => 'Không thể đăng nhập. Vui lòng thử lại sau.';
+
+  @override
+  String get welcome_errorPermission => 'Quyền truy cập bị từ chối';
+
+  @override
+  String get welcome_errorUnknown => 'Đã có lỗi xảy ra. Vui lòng thử lại.';
+
+  @override
   String get home_appName => 'DIGITAL SANCTUARY';
 
   @override

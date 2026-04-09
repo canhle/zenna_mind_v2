@@ -46,6 +46,10 @@
   "welcome_copyright": "© 2024 Thiền Sanctuary",
   "welcome_privacy": "Chính sách bảo mật",
   "welcome_terms": "Điều khoản sử dụng",
+  "welcome_errorNoNetwork": "Kiểm tra kết nối mạng và thử lại",
+  "welcome_errorAuth": "Không thể đăng nhập. Vui lòng thử lại sau.",
+  "welcome_errorPermission": "Quyền truy cập bị từ chối",
+  "welcome_errorUnknown": "Đã có lỗi xảy ra. Vui lòng thử lại.",
 
   "@@_HOME": "===============================================================",
   "home_appName": "DIGITAL SANCTUARY",

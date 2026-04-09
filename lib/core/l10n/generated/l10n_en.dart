@@ -106,6 +106,18 @@ class SEn extends S {
   String get welcome_terms => 'Terms of Use';
 
   @override
+  String get welcome_errorNoNetwork => 'Check your connection and try again';
+
+  @override
+  String get welcome_errorAuth => 'Sign-in failed. Please try again later.';
+
+  @override
+  String get welcome_errorPermission => 'Permission denied';
+
+  @override
+  String get welcome_errorUnknown => 'Something went wrong. Please try again.';
+
+  @override
   String get home_appName => 'DIGITAL SANCTUARY';
 
   @override

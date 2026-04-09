@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$WelcomeUiState {
+  AsyncValue<void> get signInStatus => throw _privateConstructorUsedError;
   WelcomeEvent? get event => throw _privateConstructorUsedError;
 
   /// Create a copy of WelcomeUiState
@@ -33,7 +34,7 @@ abstract class $WelcomeUiStateCopyWith<$Res> {
     $Res Function(WelcomeUiState) then,
   ) = _$WelcomeUiStateCopyWithImpl<$Res, WelcomeUiState>;
   @useResult
-  $Res call({WelcomeEvent? event});
+  $Res call({AsyncValue<void> signInStatus, WelcomeEvent? event});
 }
 
 /// @nodoc
@@ -50,9 +51,13 @@ class _$WelcomeUiStateCopyWithImpl<$Res, $Val extends WelcomeUiState>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? event = freezed}) {
+  $Res call({Object? signInStatus = null, Object? event = freezed}) {
     return _then(
       _value.copyWith(
+            signInStatus: null == signInStatus
+                ? _value.signInStatus
+                : signInStatus // ignore: cast_nullable_to_non_nullable
+                      as AsyncValue<void>,
             event: freezed == event
                 ? _value.event
                 : event // ignore: cast_nullable_to_non_nullable
@@ -72,7 +77,7 @@ abstract class _$$WelcomeUiStateImplCopyWith<$Res>
   ) = __$$WelcomeUiStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({WelcomeEvent? event});
+  $Res call({AsyncValue<void> signInStatus, WelcomeEvent? event});
 }
 
 /// @nodoc
@@ -88,9 +93,13 @@ class __$$WelcomeUiStateImplCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? event = freezed}) {
+  $Res call({Object? signInStatus = null, Object? event = freezed}) {
     return _then(
       _$WelcomeUiStateImpl(
+        signInStatus: null == signInStatus
+            ? _value.signInStatus
+            : signInStatus // ignore: cast_nullable_to_non_nullable
+                  as AsyncValue<void>,
         event: freezed == event
             ? _value.event
             : event // ignore: cast_nullable_to_non_nullable
@@ -103,14 +112,20 @@ class __$$WelcomeUiStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$WelcomeUiStateImpl implements _WelcomeUiState {
-  const _$WelcomeUiStateImpl({this.event});
+  const _$WelcomeUiStateImpl({
+    this.signInStatus = const AsyncValue<void>.data(null),
+    this.event,
+  });
 
+  @override
+  @JsonKey()
+  final AsyncValue<void> signInStatus;
   @override
   final WelcomeEvent? event;
 
   @override
   String toString() {
-    return 'WelcomeUiState(event: $event)';
+    return 'WelcomeUiState(signInStatus: $signInStatus, event: $event)';
   }
 
   @override
@@ -118,11 +133,13 @@ class _$WelcomeUiStateImpl implements _WelcomeUiState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$WelcomeUiStateImpl &&
+            (identical(other.signInStatus, signInStatus) ||
+                other.signInStatus == signInStatus) &&
             (identical(other.event, event) || other.event == event));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, event);
+  int get hashCode => Object.hash(runtimeType, signInStatus, event);
 
   /// Create a copy of WelcomeUiState
   /// with the given fields replaced by the non-null parameter values.
@@ -137,9 +154,13 @@ class _$WelcomeUiStateImpl implements _WelcomeUiState {
 }
 
 abstract class _WelcomeUiState implements WelcomeUiState {
-  const factory _WelcomeUiState({final WelcomeEvent? event}) =
-      _$WelcomeUiStateImpl;
+  const factory _WelcomeUiState({
+    final AsyncValue<void> signInStatus,
+    final WelcomeEvent? event,
+  }) = _$WelcomeUiStateImpl;
 
+  @override
+  AsyncValue<void> get signInStatus;
   @override
   WelcomeEvent? get event;
 

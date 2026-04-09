@@ -8,9 +8,9 @@ description: Full logic implementation pipeline for a screen: plan → tasks →
 $ARGUMENTS
 ```
 
-The argument is the screen name (e.g., `browse`, `home`, `player`, `streak`, `meditation_complete`).
+The argument is the screen name (e.g., `welcome`, `browse`, `home`, `player`, `streak`, `meditation_complete`).
 
-If no argument provided, ask: "Which screen do you want to implement? (browse / home / player / streak / meditation_complete)"
+If no argument provided, ask: "Which screen do you want to implement? (welcome / browse / home / player / streak / meditation_complete)"
 
 ---
 
@@ -28,7 +28,7 @@ If no argument provided, ask: "Which screen do you want to implement? (browse / 
 
 3. Read `docs/spec/app-domain.md` for shared entity context throughout this session.
 
-4. Read `docs/db/zenna_mind_database_design.pdf` — Firestore schema is the authoritative source for all data contracts. All DataSources in this project read from Cloud Firestore, NOT REST.
+4. Read `docs/db/zenna_mind_database_design.md` — Firestore schema is the authoritative source for all data contracts. All DataSources in this project read from Cloud Firestore, NOT REST.
 
 5. Determine SCREEN_NAME from `$ARGUMENTS`.
 
@@ -60,7 +60,7 @@ Read `.claude/commands/speckit.plan.md` in full and execute ALL its steps.
 2. **Data layer MUST use Cloud Firestore**, not Dio/HTTP:
    - DataSources use `cloud_firestore` (`FirebaseFirestore.instance`) — not Dio
    - Name DataSources `{screen}_firestore_datasource.dart` (not `*_remote_datasource.dart`)
-   - For every entity fetched, cite the exact Firestore path from `docs/db/zenna_mind_database_design.pdf` in the plan
+   - For every entity fetched, cite the exact Firestore path from `docs/db/zenna_mind_database_design.md` in the plan
    - Specify read mode per query: one-shot `get()` vs realtime `snapshots()` stream
    - Error handling: `FirebaseException` → `Failure` translated inside the DataSource (no Dio interceptor applies here)
    - Models use `@JsonSerializable` with `fromFirestore`/`toFirestore` conversion helpers, or manual `fromMap`/`toMap`
@@ -96,7 +96,7 @@ Read `.claude/commands/speckit.analyze.md` in full and execute ALL its steps.
 **Additional checks beyond standard speckit.analyze:**
 - Verify every mock field in existing UiState is accounted for in the plan (Firestore, local, computed, or explicit static/l10n)
 - Verify entities in plan match definitions in `docs/spec/app-domain.md` — no drift
-- Verify every Firestore path cited in the plan actually exists in `docs/db/zenna_mind_database_design.pdf` — no invented collections
+- Verify every Firestore path cited in the plan actually exists in `docs/db/zenna_mind_database_design.md` — no invented collections
 - Verify no plan.md task mentions Dio, REST, endpoints, or HTTP — this app is Firestore-only
 
 Output consistency report. If any blocker: STOP until resolved.

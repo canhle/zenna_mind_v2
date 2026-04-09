@@ -40,3 +40,11 @@ class ServerFailure extends Failure {
       : super(message);
   final String? errorCode;
 }
+
+class AuthFailure extends Failure {
+  const AuthFailure([super.message = 'Authentication failed']);
+}
+
+class PermissionFailure extends Failure {
+  const PermissionFailure() : super('Permission denied');
+}

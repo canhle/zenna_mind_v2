@@ -565,24 +565,109 @@ class Product with _$Product {
   }) = _Product;
 }
 
-// data/models/product_model.dart — JSON mapping
+// data/models/product_model.dart — Firestore mapping
+//
+// Standard pattern for ALL Firestore models:
+// 1. @JsonSerializable() — auto-generates fromJson/toJson
+// 2. Field names match the Firestore document EXACTLY (no @JsonKey rename)
+// 3. @TimestampConverter() on DateTime fields → Timestamp ↔ DateTime
+// 4. Nested sub-maps become their own @JsonSerializable model
+// 5. fromFirestore() merges doc.id into the data map then delegates to fromJson
+// 6. toFirestoreForCreate() spreads toJson() and overrides write-time fields
+//    (FieldValue.serverTimestamp(), FieldValue.increment(), etc.)
+// 7. toEntity() converts wire types (int seconds, String enum) to Dart types
+//    (Duration, enum) — keeps the entity Dart-idiomatic.
+
 @JsonSerializable()
 class ProductModel {
-  final String productId;   // raw snake_case from API
-  final String productName;
-  final int priceAmount;
-  final String priceCurrency;
-  final bool isDeleted;     // filtered out before reaching domain
-  final String createdAt;   // raw string, parsed in mapper
+  const ProductModel({
+    required this.id,
+    this.name = '',
+    this.price = 0,
+    this.isActive = true,
+    this.createdAt,
+  });
+
+  final String id;
+  final String name;
+  final int price;
+  final bool isActive;
+
+  @TimestampConverter()
+  final DateTime? createdAt;
+
+  factory ProductModel.fromJson(Map<String, dynamic> json) =>
+      _$ProductModelFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ProductModelToJson(this);
+
+  /// Reads a Firestore snapshot. Merges doc.id into the data map so the
+  /// generated `fromJson` always has a populated `id` field even if the
+  /// document body omits it.
+  factory ProductModel.fromFirestore(
+    DocumentSnapshot<Map<String, dynamic>> doc,
+  ) {
+    final data = <String, dynamic>{
+      ...?doc.data(),
+      'id': doc.id,
+    };
+    return ProductModel.fromJson(data);
+  }
+
+  /// Map for the *create* path. Server timestamps override null DateTime
+  /// fields so the device clock is irrelevant.
+  Map<String, Object?> toFirestoreForCreate() => {
+        ...toJson(),
+        'createdAt': FieldValue.serverTimestamp(),
+      };
 
   Product toEntity() => Product(
-    id: productId,
-    name: productName,
-    price: Price(amount: priceAmount, currency: priceCurrency),
-    createdAt: DateTime.parse(createdAt),
-  );
+        id: id,
+        name: name,
+        price: price,
+        createdAt: createdAt ?? DateTime.now(),
+      );
 }
 ```
+
+#### Reusable Firestore JsonConverters
+
+Custom converters live in `lib/core/firebase/` and apply to any model field via annotation.
+
+```dart
+// lib/core/firebase/timestamp_converter.dart
+class TimestampConverter implements JsonConverter<DateTime?, Timestamp?> {
+  const TimestampConverter();
+
+  @override
+  DateTime? fromJson(Timestamp? json) => json?.toDate();
+
+  @override
+  Timestamp? toJson(DateTime? object) =>
+      object == null ? null : Timestamp.fromDate(object);
+}
+
+// Non-nullable variant for fields guaranteed populated.
+class RequiredTimestampConverter implements JsonConverter<DateTime, Timestamp> {
+  const RequiredTimestampConverter();
+
+  @override
+  DateTime fromJson(Timestamp json) => json.toDate();
+
+  @override
+  Timestamp toJson(DateTime object) => Timestamp.fromDate(object);
+}
+```
+
+**Why this pattern is mandatory for Firestore models:**
+- Eliminates ~70% of boilerplate vs hand-written `fromFirestore`/`toFirestore`
+- `Timestamp` ↔ `DateTime` conversion is centralized — no copy-paste bugs
+- Nullable defaults via constructor parameters replace repetitive `?? defaultValue` ladders
+- The generated code is readable and stable across Firestore SDK upgrades
+- `FieldValue.serverTimestamp()` for writes still works via the `toFirestoreForCreate()` override pattern
+
+**When NOT to use `@JsonSerializable`:**
+- Models that need imperative parsing logic (e.g., dynamic field type detection) — fall back to manual `fromMap`. This is the rare exception, not the rule.
 
 ### 3.6 UseCase Guidelines
 
@@ -817,7 +902,7 @@ void _handleError(Object error) {
 
 ### 3.8 Data Backend Layer
 
-Use **Cloud Firestore via `cloud_firestore`** as the primary data backend. The schema is defined in `docs/db/zenna_mind_database_design.pdf`. Dio is reserved in `core/network/` for potential future REST features.
+Use **Cloud Firestore via `cloud_firestore`** as the primary data backend. The schema is defined in `docs/db/zenna_mind_database_design.md`. Dio is reserved in `core/network/` for potential future REST features.
 
 ```dart
 // core/firebase/firestore_provider.dart
@@ -854,7 +939,7 @@ class ProductFirestoreDataSourceImpl implements ProductFirestoreDataSource {
   @override
   Future<List<ProductModel>> getProducts({required String categoryId}) async {
     try {
-      // Firestore path per docs/db/zenna_mind_database_design.pdf
+      // Firestore path per docs/db/zenna_mind_database_design.md
       final snapshot = await _firestore
           .collection('products')
           .where('categoryId', isEqualTo: categoryId)

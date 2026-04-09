@@ -289,6 +289,30 @@ abstract class S {
   /// **'Terms of Use'**
   String get welcome_terms;
 
+  /// Sign-in failed: no network
+  ///
+  /// In en, this message translates to:
+  /// **'Check your connection and try again'**
+  String get welcome_errorNoNetwork;
+
+  /// Sign-in failed: auth error
+  ///
+  /// In en, this message translates to:
+  /// **'Sign-in failed. Please try again later.'**
+  String get welcome_errorAuth;
+
+  /// Sign-in failed: permission denied
+  ///
+  /// In en, this message translates to:
+  /// **'Permission denied'**
+  String get welcome_errorPermission;
+
+  /// Sign-in failed: unknown error
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong. Please try again.'**
+  String get welcome_errorUnknown;
+
   /// Home screen app name in app bar
   ///
   /// In en, this message translates to:

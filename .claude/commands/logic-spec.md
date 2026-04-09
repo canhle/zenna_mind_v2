@@ -8,9 +8,9 @@ description: Create a logic spec for a specific screen. Focuses on data binding,
 $ARGUMENTS
 ```
 
-The argument is the screen name (e.g., `browse`, `home`, `player`, `streak`, `meditation_complete`).
+The argument is the screen name (e.g., `welcome`, `browse`, `home`, `player`, `streak`, `meditation_complete`).
 
-If no argument provided, ask: "Which screen do you want to spec? (browse / home / player / streak / meditation_complete)"
+If no argument provided, ask: "Which screen do you want to spec? (welcome / browse / home / player / streak / meditation_complete)"
 
 ---
 
@@ -31,7 +31,7 @@ If no argument provided, ask: "Which screen do you want to spec? (browse / home 
    - ViewModel: `lib/features/{SCREEN_NAME}/{SCREEN_NAME}_view_model.dart`
    - Mock data: `lib/features/{SCREEN_NAME}/models/{SCREEN_NAME}_mock_data.dart` (may not exist)
    - `docs/spec/app-domain.md`
-   - `docs/db/zenna_mind_database_design.pdf` — **Firestore schema** (authoritative data source for this app)
+   - `docs/db/zenna_mind_database_design.md` — **Firestore schema** (authoritative data source for this app)
 
    If `ui_plan.md` is not found, warn but continue.
 
@@ -52,7 +52,7 @@ CONTEXT:
 
 DATA BACKEND:
 - Data source: Cloud Firestore (NO REST API)
-- Firestore schema: see docs/db/zenna_mind_database_design.pdf
+- Firestore schema: see docs/db/zenna_mind_database_design.md
 - Read patterns: one-shot `get()` or realtime `snapshots()` depending on the UX need — specify which per field
 - Error translation: FirebaseException → Failure at data source boundary
 

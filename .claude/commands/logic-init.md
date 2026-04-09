@@ -33,7 +33,7 @@ Run this ONCE before starting `/logic-spec` on any screen.
 3. Also read:
    - `.specify/memory/constitution.md`
    - `docs/architecture-guide.md`
-   - `docs/db/zenna_mind_database_design.pdf` — **authoritative source** for Firestore collection structure, document shapes, and relationships
+   - `docs/db/zenna_mind_database_design.md` — **authoritative source** for Firestore collection structure, document shapes, and relationships
 
 ---
 
@@ -46,7 +46,7 @@ Entities that appear in MORE THAN ONE screen. For each:
 - Canonical name (PascalCase Dart class name)
 - Fields (name, type, nullable, description)
 - Which screens use it
-- **Firestore collection/document path** that backs this entity (from `docs/db/zenna_mind_database_design.pdf`)
+- **Firestore collection/document path** that backs this entity (from `docs/db/zenna_mind_database_design.md`)
 
 **B. Navigation Contracts**
 For each screen-to-screen transition:
@@ -76,7 +76,7 @@ Create or overwrite `docs/spec/app-domain.md` with this structure:
 ## Data Backend
 
 **The app fetches all data directly from Cloud Firestore.** No REST API layer.
-Firestore collection structure and document shapes are defined in `docs/db/zenna_mind_database_design.pdf` — that PDF is the authoritative source for all data contracts.
+Firestore collection structure and document shapes are defined in `docs/db/zenna_mind_database_design.md` — that file is the authoritative source for all data contracts.
 
 Implications:
 - DataSources are Firestore data sources (using `cloud_firestore` package), not Dio/HTTP

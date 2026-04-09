@@ -85,7 +85,7 @@ The `design_system/` layer MUST remain independent from business logic and app c
 
 - **Language**: Flutter 3.x / Dart 3.x
 - **Target platforms**: iOS and Android
-- **Data backend**: Cloud Firestore via the `cloud_firestore` package. The Firestore schema is defined in `docs/db/zenna_mind_database_design.pdf` — that document is the authoritative source for all collection paths, document shapes, and relationships. There is NO REST API layer.
+- **Data backend**: Cloud Firestore via the `cloud_firestore` package. The Firestore schema is defined in `docs/db/zenna_mind_database_design.md` — that document is the authoritative source for all collection paths, document shapes, and relationships. There is NO REST API layer.
 - **Read modes**: Use one-shot `get()` for static/cacheable data and `snapshots()` streams for data that must update in realtime (e.g., live progress, presence). Choose deliberately per query, not by default.
 - **Authentication**: Firebase Authentication. The `currentUser.uid` MUST be passed into queries that read user-scoped data — never trust client-side filters alone (rely on Firestore Security Rules as the enforcement layer).
 - **Navigation**: GoRouter with `AppRoutes` constants

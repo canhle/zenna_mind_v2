@@ -125,7 +125,13 @@ This checklist is derived from `coding-conventions.md`. Use it to review code be
 # 6. Entity vs Model
 
 - [ ] Entity in `domain/entities/` — pure Dart, no framework dependencies (no `cloud_firestore`, no Dio)
-- [ ] Model in `data/models/` — mirrors Firestore document shape via `fromFirestore(DocumentSnapshot)` + `toFirestore()`; may use `@JsonSerializable` for map conversion
+- [ ] Model in `data/models/` — mirrors Firestore document shape exactly (field names match document keys)
+- [ ] Model uses `@JsonSerializable` — auto-generates `fromJson` / `toJson` (manual mapping is the rare exception, not the default)
+- [ ] `DateTime` fields annotated with `@TimestampConverter()` from `lib/core/firebase/timestamp_converter.dart`
+- [ ] Model has `factory fromFirestore(DocumentSnapshot)` that merges `doc.id` into the data map then delegates to `fromJson`
+- [ ] Model has `toFirestoreForCreate()` (or similar) that spreads `toJson()` and overrides write-time fields with `FieldValue.serverTimestamp()` / `FieldValue.increment()` as needed
+- [ ] Nested sub-maps become their own `@JsonSerializable` model (e.g., `UserSettingsModel` inside `UserProfileModel`)
+- [ ] Wire-format types (`int` seconds, `String` enum keys) stay in the model; conversion to Dart types (`Duration`, enum) happens in `toEntity()`
 - [ ] Model provides `toEntity()` method for conversion
 - [ ] Entity used by ViewModel, UiState, UseCase
 - [ ] Model used ONLY by DataSource, RepositoryImpl
@@ -162,7 +168,7 @@ This checklist is derived from `coding-conventions.md`. Use it to review code be
 
 - [ ] Primary backend is Cloud Firestore via `cloud_firestore` — NOT REST/Dio
 - [ ] DataSource class name: `*_firestore_datasource.dart`
-- [ ] Every Firestore path cited in code matches `docs/db/zenna_mind_database_design.pdf`
+- [ ] Every Firestore path cited in code matches `docs/db/zenna_mind_database_design.md`
 - [ ] DataSources are stateless — no caching, no retry logic, no state
 - [ ] FirestoreDataSources have exactly ONE `try/catch` per public method, delegating to `mapFirestoreError`
 - [ ] Read mode chosen deliberately: `get()` for static data, `snapshots()` for realtime
